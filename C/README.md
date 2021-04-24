@@ -1,3 +1,0 @@
-# C-algorithm
-Personally Project
-#
