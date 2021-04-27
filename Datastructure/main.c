@@ -63,10 +63,9 @@ int main(int argc, char const *argv[])
 	// ShowList(N);
 
 
-	Reverse_PrintAndDelet(L);
+	ShowList(L);
 
-
-
+	printf("\n");
 
 
 
