@@ -43,36 +43,64 @@ int main(int argc, char const *argv[])
 {
 
 	LinkList L;
-	InitList(&L);
+
+
+	L->data = 3;
+	printf("%d\n", L->data);
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	
 	
-	Creat_List_Tail(&L);
+	// Creat_List_Tail(&L);
 
-	// LinkList M,N;
-	// InitList(&M);
-	// InitList(&N);
+	// // LinkList M,N;
+	// // InitList(&M);
+	// // InitList(&N);
 
-	// printf("Please Enter you LNode\n");
-	// Creat_List_Tail(&M);
-	// printf("Enter your another LNode\n");
-	// Creat_List_Tail(&N);
-
-
-	// ShowList(M);
-	// ShowList(N);
+	// // printf("Please Enter you LNode\n");
+	// // Creat_List_Tail(&M);
+	// // printf("Enter your another LNode\n");
+	// // Creat_List_Tail(&N);
 
 
-	Reverse_PrintAndDelet(L);
+	// // ShowList(M);
+	// // ShowList(N);
 
 
+	// Reverse_PrintAndDelet(L);
 
 
 
 
 
-
-	return 0;
+	// return 0;
 }
 
 
