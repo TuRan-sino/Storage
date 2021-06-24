@@ -1,24 +1,17 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include "../C/Lib/lib_c.h"
-
-typedef int Elemtype;
-typedef struct LNode{
-	Elemtype data;
-	
-}LNode, LinkList*;
-
-
-
-
-
-
-
 
 int main(int argc, char const *argv[])
 {
-		
+	for(int i = 0; i <= 2; i ++){
+		for(int j = 0; j < 1; j ++){
+			
+		}
+	}
+
+
+
+
+
 
 
 	return 0;
