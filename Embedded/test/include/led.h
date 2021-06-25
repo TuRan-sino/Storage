@@ -10,7 +10,7 @@ extern void led_init(void);
 extern void led_on(unsigned int num);
 extern void led_off(unsigned int num);
 extern void led_convert(unsigned int num);
-
+extern void led_choice(unsigned int num);
 
 
 

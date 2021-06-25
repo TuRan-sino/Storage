@@ -1,5 +1,12 @@
 #include <exynos_4412.h>
 
+#define HALF "50%"
+#define TOTAL "100%"
+#define ThreeQuarters "75%"
+#define TEN "10%"
+#define EMPTY "0%"
+
+
 void uart_init(void)
 {
 	//设置gpio为串口功能, GPA1CON[3:0] = 2; GPA1CON[7:4] = 0x2
@@ -89,4 +96,25 @@ void uart_gets(char *str, int n)
 	}
 
 	return;
+}
+
+void uart_choice(unsigned int num)
+{
+	switch(num){
+		case 0:
+			uart_puts(EMPTY);
+			break;
+		case 1: 
+			uart_puts(TEN);
+			break;
+		case 2:
+			uart_puts(HALF);
+			break;
+		case 3:
+			uart_puts(ThreeQuarters);
+			break;
+		case 4:
+			uart_puts(TOTAL);
+			break;
+	}
 }

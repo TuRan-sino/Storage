@@ -1,5 +1,5 @@
 
-NAME := uart
+NAME := test
 CROESS_COMPILE := arm-none-linux-gnueabi-
 #======================================================================#
 CC := $(CROESS_COMPILE)gcc

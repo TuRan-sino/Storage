@@ -7,6 +7,6 @@
 
 
 extern void delay_ms(unsigned int n);
-extern void print(const char *fmt, ...);
+extern void printf (const char *fmt, ...);
 
 #endif
