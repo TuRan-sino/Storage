@@ -53,3 +53,14 @@ unsigned char key_read(void)
 
 	return 0;
 }
+
+int key_CloseBeep(void)
+{
+	if(!(GPX3.DAT & (0x1 << 2))){				//按下按键
+			while(!(GPX3.DAT & (0x1 << 2))){;	//等待按键松开
+			return 1; 	
+			}						//按键确实松开了, 返回1
+	}else{
+		return 0;								//根本没有按下按键, 返回0
+	}
+}

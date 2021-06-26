@@ -3,7 +3,7 @@
 
 extern void key_init(void);
 extern unsigned char key_read(void);
-
+extern int key_CloseBeep(void);
 
 
 #endif

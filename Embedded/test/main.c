@@ -4,12 +4,14 @@
 #include <uart.h>
 #include <adc.h>
 #include <pwm.h>
+#include <key.h>
 
 int main(void)
 {	
 	unsigned int i = 100;
 	int num = 0;
 	unsigned int retval = 0;
+	key_init();					//初始化key
 	led_init();					//初始化LED
 	adc_init();					//初始化adc
 	uart_init();				//初始化uart
@@ -21,11 +23,16 @@ int main(void)
 
 
 		if(retval <= 1000){			//电池电量低于5%蜂鸣器报警
+			if(key_CloseBeep() == 1){
+				pwm_close();
+				goto jump;
+			}
 			pwm_init();					//初始化pwm
-			pwm_setfre(i, i/2);	
+			pwm_setfre(i, i/2);
 		}else{
 			pwm_close();
 		}
+		jump:
 
 
 		/*
@@ -47,6 +54,7 @@ int main(void)
 
 		led_choice(num);
 		printf("%d% | %d \r\n", retval * 100 / 4095, retval);
+
 
 
 
