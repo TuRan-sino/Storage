@@ -16,17 +16,26 @@
 
 输入：nums = [3,2,4], target = 6
 输出：[1,2]
-示例 3：
 
+示例 3：
 输入：nums = [3,3], target = 6
 输出：[0,1]。
 */
 #include <stdio.h>
 
+int* twosum(int *nums, int numsize, int target, int *returnSize);
+
 int main(int argc, char const *argv[])
 {
-	int nums[];
-	int target;
+	int nums[] = {2, 7, 11, 15};
+	int target = 9;
+	int numsize = sizeof(nums) / sizeof(int);
+	int ret[2];
+
+	int returnSize = 0;
+
+
+	ret = twosum(nums, numsize, target, &returnSize);	
 
 
 
@@ -34,7 +43,22 @@ int main(int argc, char const *argv[])
 	return 0;
 }
 
-int* twosum(int *nums, int numsSize, int target, int *returnSize)
+int* twosum(int *nums, int numsize, int target, int *returnSize)
 {
-	
+	int ret[2];
+	for(int i = 0; i < numsize; i ++){
+		for(int j = i + 1; j < numsize; j ++){
+			if(nums[i] + nums[j] == target){
+				ret[0] = i;
+				ret[1] = j;
+
+				*returnSize = 2;
+				return ret;
+			}
+		}
+	}
+
+	*returnSize = 0;
+
+	return NULL;
 }
