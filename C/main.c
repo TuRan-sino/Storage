@@ -11,8 +11,6 @@
 #define TRUE 1
 
 
-
-
 typedef int ElemType;
 typedef struct LNode{
 	ElemType data;
