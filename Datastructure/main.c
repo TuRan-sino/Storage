@@ -2,111 +2,94 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-
+#define INITSIZE 10
 #define TRUE 1
 #define FALSE 0
-#define MaxSize 20
+#define increasenum 10
+
+typedef	struct{
+	int *data;
+	int length;				
+	int Maxsize;
+}SqList;
 
 
 
-typedef int ElemType;
-typedef struct{
-	ElemType *data;
-	int top;
-}SqStack;
-
-bool InitStack(SqStack *S);
-bool IfEmpty(SqStack S);
-bool push(SqStack *S, ElemType e);
-bool pop(SqStack *S, ElemType *e);
-bool ShowStack(SqStack S);
-bool GetTop(SqStack S, ElemType *e);
+void ShowList(SqList L);
+bool IncreaseSize(SqList *L, int len);
+bool CreatList(SqList *L);
+bool InitList(SqList *L);
 int main(int argc, char const *argv[])
 {
-	SqStack S;
-	InitStack(&S);
-	
+	SqList L;
 
-	push(&S, 1230);
-	push(&S, 123123);
-
-	int e = 0;
-
-	GetTop(S, &e);
-
-	ShowStack(S);
-
-
-
-
+	InitList(&L);
+	CreatList(&L);
+	ShowList(L);
 
 	return 0;
 }
 
-bool InitStack(SqStack *S)
+bool InitList(SqList *L)
 {
-	(*S).data = (ElemType *) malloc(sizeof(ElemType) * MaxSize);
-	if(!S->data){
+	L->data = (int *) malloc(sizeof(int) * INITSIZE);
+	if(!L->data){
 		return FALSE;
 	}
-	S->top = 1;
+
+	L->length = 0;
+	L->Maxsize = INITSIZE;
+
+
+
 	return TRUE;
 }
 
-
-bool IfEmpty(SqStack S)
+bool IncreaseSize(SqList *L, int len)
 {
-	if(S.top == -1){
-		return FALSE;
-	}
-	return TRUE;
-}
+	// int i = 0;
+	int *p = L->data;
 
-bool push(SqStack *S, ElemType e)
-{
-	if(S->top == MaxSize - 1){
-		return FALSE;
-	}else{
-		S->top ++;
-		S->data[S->top] = e;
-		return TRUE;
+	L->data = (int *) malloc(sizeof(int) * (INITSIZE + len));
+	for(int i = 0; i < INITSIZE + len; i ++){
+		L->data[i] = 0;
 	}
-}
+	for(int i = 0; i < L->Maxsize; i ++){
+		L->data[i] = p[i];
+	}
 
-bool pop(SqStack *S, ElemType *e)
-{
-	if(S->top == -1){
-		return FALSE;
-	}else{
-		*e = S->data[S->top];
-		S->top --;
-	}
+	free(p);
+
 
 	return TRUE;
 }
 
 
-bool ShowStack(SqStack S)
+bool CreatList(SqList *L)
 {
-	if(S.top == -1){
-		return FALSE;
+	int i = 0;
+	int num = 0;
+	scanf("%d", &num);
+	while(num != -9999){
+		if(L->length + 1 > L->Maxsize){
+			IncreaseSize(L, increasenum);
+		}
+
+		L->data[i] = num;
+		i ++;
+		L->length ++;
+		scanf("%d", &num);
 	}
-	for(int i = 0; i <= S.top; i ++){
-		printf("%d\n", S.data[i]);	
+
+	return TRUE;
+}
+
+
+void ShowList(SqList L)
+{
+	int i = 0;
+	for(i = 0; i < L.length; i ++){
+		printf("%d\n", L.data[i]);		
 	}
 	printf("\n");
-
-	return TRUE;
 }
-
-bool GetTop(SqStack S, ElemType *e)
-{
-	if(S.top == -1){
-		return FALSE;
-	}
-
-	*e = S.data[S.top];
-
-	return TRUE;
-}
-
