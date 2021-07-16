@@ -4,3 +4,4 @@
 *.out
 *.~$lock
 test.c
+*.swp
