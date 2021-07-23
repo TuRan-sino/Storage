@@ -12,13 +12,13 @@
 #define INCREMENT_SIZE 5	//分配增量
 
 typedef int Status;
-typedef int Elemtype;
+typedef int ElemType;
 
 /*
  * 存储结构
  */
 typedef struct{
-    Elemtype *elem;	//存储空间基址
+    ElemType *elem;	//存储空间基址
     int length;		//当前长度
     int size;		//当前分配的表长大小
     int 
@@ -28,7 +28,7 @@ typedef struct{
  * 初始化一个空的线性表
  */
 Status InitList(SqList *L){
-	L->elem = (Elemtype *) malloc(INIT_SIZE * sizeof(Elemtype));
+	L->elem = (ElemType *) malloc(INIT_SIZE * sizeof(ElemType));
 	if (!L->elem)
 	{
 		return ERROR;
@@ -78,7 +78,7 @@ Status getLength(const SqList L){
 /*
  * 根据位置获取元素
  */
-Status GetElem(const SqList L, int i, Elemtype *e){
+Status GetElem(const SqList L, int i, ElemType *e){
 	if (i < 1 || i > L.length)
 	{
 		return ERROR;
@@ -90,7 +90,7 @@ Status GetElem(const SqList L, int i, Elemtype *e){
 /*
  * 比较两个元素是否相等
  */
-Status compare(Elemtype e1, Elemtype e2){
+Status compare(ElemType e1, ElemType e2){
 	if (e1 == e2){
 		return 0;
 	}
@@ -105,7 +105,7 @@ Status compare(Elemtype e1, Elemtype e2){
 /*
  * 查找元素
  */
-Status FindElem(const SqList L, Elemtype e, Status (*compare)(Elemtype, Elemtype)){
+Status FindElem(const SqList L, ElemType e, Status (*compare)(ElemType, ElemType)){
 	int i;
 	for (i = 0; i < L.length; i++){
 		if (!(*compare)(L.elem[i], e)){
@@ -120,7 +120,7 @@ Status FindElem(const SqList L, Elemtype e, Status (*compare)(Elemtype, Elemtype
 /*
  * 查找前驱元素
  */
-Status PreElem(const SqList L, Elemtype cur_e, Elemtype *pre_e){
+Status PreElem(const SqList L, ElemType cur_e, ElemType *pre_e){
 	int i;
 	for (i = 0; i < L.length; i++){
 		if (cur_e == L.elem[i]){
@@ -140,7 +140,7 @@ Status PreElem(const SqList L, Elemtype cur_e, Elemtype *pre_e){
 /*
  * 查找后继元素
  */
-Status NextElem(const SqList L, Elemtype cur_e, Elemtype *next_e){
+Status NextElem(const SqList L, ElemType cur_e, ElemType *next_e){
 	int i;
 	for (i = 0; i < L.length; i++){
 		if (cur_e == L.elem[i]){
@@ -161,21 +161,21 @@ Status NextElem(const SqList L, Elemtype cur_e, Elemtype *next_e){
 /*
  * 插入元素
  */
-Status InsertElem(SqList *L, int i, Elemtype e){
-	Elemtype *new;
+Status InsertElem(SqList *L, int i, ElemType e){
+	ElemType *new;
 	if (i < 1 || i > L->length + 1){
 		return ERROR;
 	}
 	if (L->length >= L->size){
-		new = (Elemtype*) realloc(L->elem, (L->size + INCREMENT_SIZE) * sizeof(Elemtype));
+		new = (ElemType*) realloc(L->elem, (L->size + INCREMENT_SIZE) * sizeof(ElemType));
 		if (!new){
 			return ERROR;
 		}
 		L->elem = new;
 		L->size += INCREMENT_SIZE;
 	}
-	Elemtype *p = &L->elem[i - 1];
-	Elemtype *q = &L->elem[L->length - 1];
+	ElemType *p = &L->elem[i - 1];
+	ElemType *q = &L->elem[L->length - 1];
 	for (; q >= p; q--){
 		*(q + 1) = *q;
 	}
@@ -187,11 +187,11 @@ Status InsertElem(SqList *L, int i, Elemtype e){
 /*
  * 删除元素并返回其值
  */
-Status DeleteElem(SqList *L, int i, Elemtype *e){
+Status DeleteElem(SqList *L, int i, ElemType *e){
 	if (i < 1 || i > L->length){
 		return ERROR;
 	}
-	Elemtype *p = &L->elem[i - 1];
+	ElemType *p = &L->elem[i - 1];
 	*e = *p;
 	for (; p < &L->elem[L->length]; p++){
 		*(p) = *(p + 1);
@@ -203,14 +203,14 @@ Status DeleteElem(SqList *L, int i, Elemtype *e){
 /*
  * 访问元素
  */
-void visit(Elemtype e){
+void visit(ElemType e){
 	printf("%d ", e);
 }
 
 /*
  * 遍历线性表
  */
-Status TraverseList(const SqList L, void (*visit)(Elemtype)){
+Status TraverseList(const SqList L, void (*visit)(ElemType)){
 	int i;
 	for(i = 0; i < L.length; i++){
 		visit(L.elem[i]);
@@ -224,7 +224,7 @@ Status TraverseList(const SqList L, void (*visit)(Elemtype)){
 int main(){
 	SqList L;
 	if (InitList(&L)){
-		Elemtype e;
+		ElemType e;
 		printf("init_success\n");
 		int i;
 		for (i = 0; i < 10; i++){

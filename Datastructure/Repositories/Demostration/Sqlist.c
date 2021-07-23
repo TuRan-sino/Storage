@@ -1,3 +1,6 @@
+/*
+线性表
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -8,7 +11,7 @@
 
 
 
-typedef int Elemtype;
+typedef int ElemType;
 typedef struct{
 	int *data;				
 	int Maxsize;			//最大长度
@@ -26,7 +29,7 @@ bool CreatList(SqList *L);
 bool ChangeList(SqList *L);
 bool DestroyList(SqList *L);
 bool Delet_Elem_similar_x(SqList *L, int x);
-bool InsertElem(SqList *L, int i, Elemtype e);
+bool InsertElem(SqList *L, int i, ElemType e);
 bool Delet_Elem_between_j_and_i_ordered(SqList *L, int start, int end);
 bool Delet_Elem_between_j_and_i_Unordered(SqList *L, int start,int end);
 bool Delet_repetitive_Elem(SqList *L);
@@ -200,22 +203,22 @@ bool DestroyList(SqList *L)
 }
 
 
-bool InsertElem(SqList *L, int i, Elemtype e)			//这里面的 i 实际上表示的是位序,而不是数组下标
+bool InsertElem(SqList *L, int i, ElemType e)			//这里面的 i 实际上表示的是位序,而不是数组下标
 {
-	Elemtype *new;
+	ElemType *new;
 	if (i < 1 || i > L->length + 1){
 		return FALSE;
 	}
 	if (L->length >= L->Maxsize){
-		new = (Elemtype*) realloc(L->data, (L->Maxsize + INCREMENT_SIZE) * sizeof(Elemtype));
+		new = (ElemType*) realloc(L->data, (L->Maxsize + INCREMENT_SIZE) * sizeof(ElemType));
 		if (!new){
 			return FALSE;
 		}
 		L->data = new;
 		L->Maxsize += INCREMENT_SIZE;
 	}
-	Elemtype *p = &L->data[i - 1];
-	Elemtype *q = &L->data[L->length - 1];
+	ElemType *p = &L->data[i - 1];
+	ElemType *q = &L->data[L->length - 1];
 	for (; q >= p; q--){
 		*(q + 1) = *q;
 	}
