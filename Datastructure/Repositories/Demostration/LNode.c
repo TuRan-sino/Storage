@@ -90,10 +90,6 @@ void ShowList(LinkList L)
 bool Creat_List_Head(LinkList *L)
 {
 	LNode *s;
-	*L = (LinkList) malloc(sizeof(LNode));
-	if((*L) == NULL){
-		return NULL;
-	}
 	(*L)->next = NULL;
 	int x;
 	scanf("%d", &x);
@@ -156,9 +152,6 @@ bool Creat_List_Tail(LinkList *L)
 {
 	int x; 				// x 用于接受键盘输入
 	LNode *s, *r;
-	(*L) = (LinkList) malloc(sizeof(LNode));	//建立头节点
-	if(*L == NULL)
-		return FALSE;
 	r = (*L);
 	(*L)->next = NULL;
 	scanf("%d", &x);
