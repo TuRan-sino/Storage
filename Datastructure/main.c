@@ -13,9 +13,9 @@ typedef struct LNode{
 
 
 bool InitList(LinkList *L);
-bool CreatList_Head(LinkList *L);
+bool Creat_List_Head(LinkList *L);
 bool ShowList(LinkList L);
-
+bool Creat_List_Tail(LinkList *L);
 
 int main(int argc, char const *argv[])
 {
@@ -24,7 +24,7 @@ int main(int argc, char const *argv[])
 	InitList(&L);
 
 
-	CreatList_Head(&L);
+	Creat_List_Tail(&L);
 
 
 	ShowList(L);
@@ -51,7 +51,7 @@ bool InitList(LinkList *L)
 	return TRUE;
 }
 
-bool CreatList_Head(LinkList *L)
+bool Creat_List_Head(LinkList *L)
 {
 	LNode *s;
 	(*L)->next = NULL;
@@ -70,6 +70,26 @@ bool CreatList_Head(LinkList *L)
 
 }
 
+bool Creat_List_Tail(LinkList *L)
+{
+	LNode *temp;
+	LNode *s;
+	(*L)->next = NULL;
+	temp = *L;
+	int x = 0;
+	scanf("%d", &x);
+	while(x != -9999){
+		s = (LinkList) malloc(sizeof(LNode));
+		s->data = x;
+		s->next = temp->next;
+		temp->next = s;
+		temp = s;
+		scanf("%d", &x);
+	}
+
+	return TRUE;
+}
+
 bool ShowList(LinkList L)
 {
 	int i = 1;
@@ -85,7 +105,5 @@ bool ShowList(LinkList L)
 
 	return TRUE;
 }
-
-
 
 

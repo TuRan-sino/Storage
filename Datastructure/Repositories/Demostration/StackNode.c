@@ -18,7 +18,7 @@ typedef struct StackNode{
 
 bool InitList(LinkList *S);
 bool ShowList(LinkList S);
-bool CreatList_Head(LinkList S);
+bool Creat_List_Head(LinkList S);
 bool GetTop(LinkList S, ElemType *e);
 bool pop(LinkList S, ElemType *e);
 bool push(LinkList S, ElemType e);
@@ -31,7 +31,7 @@ int main(int argc, char const *argv[])
 	InitList(&S);
 
 	printf("Please Enter your Stack\n");
-	CreatList_Head(S);
+	Creat_List_Head(S);
 
 	push(S, 3);
 	int e;
@@ -59,7 +59,7 @@ bool InitList(LinkList *S)
 	return TRUE;
 }
 
-bool CreatList_Head(LinkList S)
+bool Creat_List_Head(LinkList S)
 {
 	StackNode *p = (StackNode *) malloc(sizeof(StackNode));
 	int x = 0;

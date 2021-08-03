@@ -15,9 +15,9 @@ typedef struct RLNode{
 bool IfEmpty(LinkList L);
 bool IsTail(LinkList L, RLNode *p);
 bool InitList(LinkList *L);
-bool CreatList_Tail(LinkList *L);
+bool Creat_List_Tail(LinkList *L);
 bool ShowList(LinkList L);
-bool CreatList_Head(LinkList *L);
+bool Creat_List_Head(LinkList *L);
 int GetElem(LinkList L, int i);
 bool DeletElem(LinkList L, int i, ElemType *e);
 int GetLength(LinkList L);
@@ -34,7 +34,7 @@ int main(int argc, char const *argv[])
 
 
 	printf("Please enter you RLNode\n");
-	CreatList_Tail(&L);
+	Creat_List_Tail(&L);
 
 
 	InsertElem(L, 2, 3);
@@ -47,7 +47,7 @@ int main(int argc, char const *argv[])
 	return 0;
 }
 
-bool CreatList_Tail(LinkList *L)
+bool Creat_List_Tail(LinkList *L)
 {
 	RLNode *p = *L;
 	int x = 0;
@@ -64,7 +64,7 @@ bool CreatList_Tail(LinkList *L)
 	return TRUE;
 }
 
-bool CreatList_Head(LinkList *L)
+bool Creat_List_Head(LinkList *L)
 {
 	RLNode *p;
 	p = (RLNode *) malloc(sizeof(RLNode));
