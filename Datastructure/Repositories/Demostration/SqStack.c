@@ -48,7 +48,7 @@ int main(int argc, char const *argv[])
 bool InitStack(SqStack *S)
 {
 	(*S).data = (ElemType *) malloc(sizeof(ElemType) * MaxSize);
-	if(!S->data){
+ 	if(!S->data){
 		return FALSE;
 	}
 	S->top = -1;
