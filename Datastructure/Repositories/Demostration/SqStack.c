@@ -8,6 +8,7 @@
 #define TRUE 1
 #define FALSE 0
 #define MaxSize 20
+#define INCREMENT_SIZE 10
 
 typedef int ElemType;
 typedef struct{
@@ -16,42 +17,50 @@ typedef struct{
 }SqStack;
 
 
-
 bool InitStack(SqStack *S);
-bool IfEmpty(SqStack s);
-bool push(SqStack *S, ElemType e);
+bool IfEmpty(SqStack S);
+bool push(SqStack *S);
 bool pop(SqStack *S, ElemType *e);
-bool ShowList(SqStack S);
 bool GetTop(SqStack S, ElemType *e);
-
+bool ShowList_TopToDown(SqStack S);
 
 int main(int argc, char const *argv[])
 {
 	SqStack S;
+
 	InitStack(&S);
 
+	push(&S);
 
 
-	push(&S, 3);
+	ShowList_TopToDown(S);
 
-	int e;
-
-	GetTop(S, &e);
-
-	printf("%d\n", e);
-	// printf("%d\n", S.top);
-	// ShowList(S);
 	return 0;
 }
 
-
 bool InitStack(SqStack *S)
 {
-	(*S).data = (ElemType *) malloc(sizeof(ElemType) * MaxSize);
-	if(!S->data){
+	S->data = (ElemType *) malloc(sizeof(ElemType) * MaxSize);
+	if(S->data == NULL){
 		return FALSE;
 	}
+
 	S->top = -1;
+
+	return TRUE;
+}
+
+bool push(SqStack *S)
+{	int e = 0;
+	scanf("%d", &e);
+	if(S->top == MaxSize - 1){
+		return FALSE;
+	}else{
+		while(e != -9999){
+			S->data[++S->top] = e;
+			scanf("%d", &e);
+		}
+	}
 
 	return TRUE;
 }
@@ -60,18 +69,9 @@ bool IfEmpty(SqStack S)
 {
 	if(S.top == -1){
 		return TRUE;
-	}else
-		return FALSE;
-}
-
-bool push(SqStack *S, ElemType e)
-{
-	if(S->top == MaxSize - 1){
+	}else{
 		return FALSE;
 	}
-	S->data[++S->top] = e;
-
-	return TRUE;
 }
 
 bool pop(SqStack *S, ElemType *e)
@@ -79,32 +79,32 @@ bool pop(SqStack *S, ElemType *e)
 	if(S->top == -1){
 		return FALSE;
 	}
-	*e = S->data[S->top --];
+	*e = S->data[S->top];
+	S->top --;
 
 	return TRUE;
 }
 
-bool ShowList(SqStack S)
-{
-	if(S.top == -1){
-		return FALSE;
-	}
-	for(int i = 0; i <= S.top; i ++){
-		printf("%d ", S.data[i]);
-	}
-	printf("\n");
-
-	return TRUE;
-}
 
 bool GetTop(SqStack S, ElemType *e)
 {
 	if(S.top == -1){
 		return FALSE;
 	}
-
 	*e = S.data[S.top];
 
 	return TRUE;
 }
 
+
+bool ShowList_TopToDown(SqStack S)
+{
+	if(S.top == -1){
+		return FALSE;
+	}
+	for(int i = S.top; i >= 0; i --){
+		printf("%d  ", S.data[i]);
+	}	
+
+	return TRUE;
+}
