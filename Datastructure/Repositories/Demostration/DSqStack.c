@@ -15,20 +15,20 @@ typedef struct{
 	ElemType *data;
 	int top_up;			//从下往上存储的栈
 	int top_down;		//从上往下存储的栈
-}SqStack;
+}DSqStack;
 
-bool InitStack(SqStack *S);
-bool IfEmpty(SqStack S);
-bool push_up(SqStack *S, ElemType e);
-bool push_down(SqStack *S, ElemType e);
-bool pop_up(SqStack *S, ElemType *e);
-bool pop_down(SqStack *S, ElemType *e);
-bool ShowList(SqStack S);
-bool GetTop(SqStack S, ElemType *m, ElemType *n);
+bool InitStack(DSqStack *S);
+bool IfEmpty(DSqStack S);
+bool push_up(DSqStack *S, ElemType e);
+bool push_down(DSqStack *S, ElemType e);
+bool pop_up(DSqStack *S, ElemType *e);
+bool pop_down(DSqStack *S, ElemType *e);
+bool ShowList(DSqStack S);
+bool GetTop(DSqStack S, ElemType *m, ElemType *n);
 
 int main(int argc, char const *argv[])
 {
-	SqStack S;
+	DSqStack S;
 	InitStack(&S);
 	int e;
 
@@ -50,7 +50,7 @@ int main(int argc, char const *argv[])
 	return 0;
 }
 
-bool InitStack(SqStack *S)
+bool InitStack(DSqStack *S)
 {
 	(*S).data = (ElemType *) malloc(sizeof(ElemType) * MaxSize);
 	if(!S->data){
@@ -62,7 +62,7 @@ bool InitStack(SqStack *S)
 	return TRUE;
 }
 
-bool IfEmpty(SqStack S)
+bool IfEmpty(DSqStack S)
 {
 	if(S.top_up == -1 && S.top_down == MaxSize){
 		return TRUE;
@@ -70,7 +70,7 @@ bool IfEmpty(SqStack S)
 		return FALSE;
 }
 
-bool push_up(SqStack *S, ElemType e)
+bool push_up(DSqStack *S, ElemType e)
 {
 	if(S->top_down - S->top_up == 1){
 		return FALSE;
@@ -80,7 +80,7 @@ bool push_up(SqStack *S, ElemType e)
 	return TRUE;
 }
 
-bool push_down(SqStack *S, ElemType e)
+bool push_down(DSqStack *S, ElemType e)
 {
 	if(S->top_down - S->top_up == 1){
 		return FALSE;
@@ -90,7 +90,7 @@ bool push_down(SqStack *S, ElemType e)
 	return TRUE;
 }
 
-bool pop_up(SqStack *S, ElemType *e)
+bool pop_up(DSqStack *S, ElemType *e)
 {
 	if(S->top_up == -1){
 		return FALSE;
@@ -100,7 +100,7 @@ bool pop_up(SqStack *S, ElemType *e)
 	return TRUE;
 }
 
-bool pop_down(SqStack *S, ElemType *e)
+bool pop_down(DSqStack *S, ElemType *e)
 {
 	if(S->top_down == MaxSize){
 		return FALSE;
@@ -110,7 +110,7 @@ bool pop_down(SqStack *S, ElemType *e)
 	return TRUE;
 }
 
-bool ShowList(SqStack S)
+bool ShowList(DSqStack S)
 {
 	if(S.top_up == -1 && S.top_down == MaxSize){
 		return FALSE;
@@ -136,7 +136,7 @@ break1:
 	return TRUE;
 }
 
-bool GetTop(SqStack S, ElemType *m, ElemType *n)
+bool GetTop(DSqStack S, ElemType *m, ElemType *n)
 {
 	if(S.top_up == -1 && S.top_down == MaxSize){
 		return FALSE;

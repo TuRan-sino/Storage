@@ -32,6 +32,9 @@ int main(int argc, char const *argv[])
 
 	push(&S);
 
+	int e = 0;
+
+	pop(&S, &e);
 
 	ShowList_TopToDown(S);
 
