@@ -29,6 +29,7 @@ int GetLength(LinkList L);
 bool Creat_List_Tail(LinkList *L);
 int Get_Elem(LinkList L, int i);
 bool Delet_Elem(LinkList L, int i, ElemType *e);
+bool InsertPriorNode(LNode *p, ElemType *e);
 
 
 int main(int argc, char const *argv[])
@@ -40,18 +41,18 @@ int main(int argc, char const *argv[])
 	Creat_List_Tail(&L);
 
 
-
+	int j = Get_Elem(L, 3);
 
 	ShowList(L);
 
-
+	printf("%d\n", j);
 
 	
 
 	return 0;
 }
 
-
+// 初始化
 bool InitList(LinkList *L)						 //为什么 InitList 需要调用*，但是 CreatList_hand 不需要*？
 {												//CreatList_hand 返回值就是 LinkList 类型
 	*L = (LinkList) malloc(sizeof(LNode));
@@ -62,6 +63,8 @@ bool InitList(LinkList *L)						 //为什么 InitList 需要调用*，但是 Cre
 	return TRUE;
 }
 
+
+// 销毁链表
 bool DestoryList(LinkList L)
 {
 	LinkList temp;
@@ -76,6 +79,7 @@ bool DestoryList(LinkList L)
 	return TRUE;
 }
 
+// 遍历链表并打印
 void ShowList(LinkList L)
 {
 	LinkList p = L->next;
@@ -86,7 +90,7 @@ void ShowList(LinkList L)
 }
 
 
-
+// 头插法创立链表
 bool Creat_List_Head(LinkList *L)
 {
 	LNode *s;
@@ -105,6 +109,7 @@ bool Creat_List_Head(LinkList *L)
 }
 
 
+// 插入(基本), 在某一结点后插入一个新的节点
 bool InsertList_num_basic(LinkList L, int i, ElemType e)
 {
 	if(i < 1)
@@ -133,7 +138,7 @@ bool InsertList_num_basic(LinkList L, int i, ElemType e)
 	return TRUE;
 }
 
-
+// 获取链表长度
 int GetLength(LinkList L)
 {
 	LinkList p;
@@ -147,7 +152,7 @@ int GetLength(LinkList L)
 	return i;
 }
 
-
+// 尾插法创立链表
 bool Creat_List_Tail(LinkList *L)
 {
 	int x; 				// x 用于接受键盘输入
@@ -168,6 +173,7 @@ bool Creat_List_Tail(LinkList *L)
 	return TRUE;
 }
 
+// 通过某一位置的data, i表示第几个元素
 int Get_Elem(LinkList L, int i)
 {
 	int j = 0;
@@ -181,6 +187,8 @@ int Get_Elem(LinkList L, int i)
 	return p->data;
 }
 
+
+// 删除某一个位置的元素, i表示第几个元素
 bool Delet_Elem(LinkList L, int i, ElemType *e)
 {
 	int j = 0;
@@ -195,6 +203,21 @@ bool Delet_Elem(LinkList L, int i, ElemType *e)
 	temp = p->next;
 	p->next = p->next->next;
 	free(temp);
+
+
+	return TRUE;
+}
+
+
+// 在某一结点之前插入一个新的节点
+bool InsertPriorNode(LNode *p, ElemType *e)
+{
+	/*
+		具体解决方法, 
+		节点p为你所需要插入的节点, elemtype e是你需要插入的数据
+		找到节点p的p->next, 之后讲节点p的数据复制到p->next->data中
+		之后讲elemtype e复制到节点p中	
+	*/
 
 
 	return TRUE;
