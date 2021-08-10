@@ -222,3 +222,4 @@ bool InsertPriorNode(LNode *p, ElemType *e)
 
 	return TRUE;
 }
+
