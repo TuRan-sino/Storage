@@ -1,5 +1,5 @@
 /*
-	顺序存储的栈
+	顺序存储的栈, L->top指向栈顶元素的情况
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,7 +13,7 @@
 typedef int ElemType;
 typedef struct{
 	ElemType *data;
-	int top;
+	int top;			// 栈顶指针, 没有元素的时候, 从-1开始
 }SqStack;
 
 
@@ -53,6 +53,7 @@ bool InitStack(SqStack *S)
 	return TRUE;
 }
 
+// 入栈, top指针永远指向栈顶元素, 因此是 先++top指针, 再复制元素
 bool push(SqStack *S)
 {	int e = 0;
 	scanf("%d", &e);
@@ -77,13 +78,14 @@ bool IfEmpty(SqStack S)
 	}
 }
 
+// 出栈
 bool pop(SqStack *S, ElemType *e)
 {
 	if(S->top == -1){
 		return FALSE;
 	}
-	*e = S->data[S->top];
-	S->top --;
+	*e = S->data[S->top];		// 显示用top的值
+	S->top --;					// 再让top的值 - 1
 
 	return TRUE;
 }

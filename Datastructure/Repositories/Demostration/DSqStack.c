@@ -13,8 +13,8 @@
 typedef int ElemType;
 typedef struct{
 	ElemType *data;
-	int top_up;			//从下往上存储的栈
-	int top_down;		//从上往下存储的栈
+	int top_up;			//从下往上存储的栈顶标号
+	int top_down;		//从上往下存储的栈顶标号
 }DSqStack;
 
 bool InitStack(DSqStack *S);
