@@ -35,10 +35,13 @@ int main(int argc, char const *argv[])
 	LinkQueue Q;
 	InitQueue(&Q);	
 
-	EnQueue(&Q, 3);
-	EnQueue(&Q, 3);
-	EnQueue(&Q, 3);
-	EnQueue(&Q, 3);
+	printf("Please input your number\n");
+	int x = 0;
+	scanf("%d", &x);
+	while(x != -9999){
+		EnQueue(&Q, x);
+		scanf("%d", &x);
+	}
 
 	ShowQueue(Q);
 
@@ -97,11 +100,11 @@ bool ShowQueue(LinkQueue Q)
 {
 	LinkNode *temp;
 	temp = Q.front;
-	if(temp->next == NULL)
+	if(Q.rear == Q.front)
 		return FALSE;
-	while(temp->next == NULL){
+	while(temp->next != NULL){
 		temp = temp->next;
-		printf("%d", temp->data);
+		printf("%d ", temp->data);
 	}
 
 	return TRUE;
