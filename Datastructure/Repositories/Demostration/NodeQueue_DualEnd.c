@@ -38,4 +38,3 @@ bool InitQueue(LinkQueue *Q)
 	else
 		return TRUE;
 }
-
