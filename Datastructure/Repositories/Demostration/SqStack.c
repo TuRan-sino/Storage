@@ -55,7 +55,8 @@ bool InitStack(SqStack *S)
 
 // 入栈, top指针永远指向栈顶元素, 因此是 先++top指针, 再复制元素
 bool push(SqStack *S)
-{	int e = 0;
+{	
+	int e = 0;	
 	scanf("%d", &e);
 	if(S->top == MaxSize - 1){
 		return FALSE;
