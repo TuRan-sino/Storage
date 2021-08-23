@@ -8,7 +8,7 @@
 #define FALSE 0
 #define OK 1
 #define ERROR 0
-#define INIT_SIZE 10		//初始化表长
+#define INITSIZE 10		//初始化表长
 #define INCREMENT_SIZE 5	//分配增量
 
 typedef int Status;
@@ -28,13 +28,13 @@ typedef struct{
  * 初始化一个空的线性表
  */
 Status InitList(SqList *L){
-	L->elem = (ElemType *) malloc(INIT_SIZE * sizeof(ElemType));
+	L->elem = (ElemType *) malloc(INITSIZE * sizeof(ElemType));
 	if (!L->elem)
 	{
 		return ERROR;
 	}
 	L->length = 0;
-	L->size = INIT_SIZE;
+	L->size = INITSIZE;
 	return OK;
 }
 
