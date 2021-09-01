@@ -6,7 +6,7 @@
 #define OK 1
 #define ERROR 0
 #define OVERFLOW -2
-#define INIT_SIZE 20
+#define INITSIZE 20
 #define INCREMENT_SIZE 5
 
 typedef int SElemType;
@@ -25,12 +25,12 @@ typedef struct{
  * 初始化栈
  */
 Status InitStack(SqStack *S){
-	S->base = (SElemType*) malloc(INIT_SIZE * sizeof(SElemType));
+	S->base = (SElemType*) malloc(INITSIZE * sizeof(SElemType));
 	if (!S->base){
 		exit(OVERFLOW);
 	}
 	S->top = S->base;
-	S->size = INIT_SIZE;
+	S->size = INITSIZE;
 	return OK;
 }
 

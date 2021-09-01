@@ -27,9 +27,11 @@ bool InsertList_num_basic(LinkList L, int i, ElemType e);
 bool Creat_List_Head(LinkList *L);
 int GetLength(LinkList L);
 bool Creat_List_Tail(LinkList *L);
-int Get_Elem(LinkList L, int i);
+int GetElem(LinkList L, int i);
 bool Delet_Elem(LinkList L, int i, ElemType *e);
 bool InsertPriorNode(LNode *p, ElemType *e);
+LNode * GetElem_Point(LinkList *L, int i);
+LNode *LocateElem_Point(LinkList *L, ElemType e);
 
 
 int main(int argc, char const *argv[])
@@ -37,16 +39,18 @@ int main(int argc, char const *argv[])
 
 	LinkList L;
 	InitList(&L);
-
+	printf("Plaese Enter your number\n");
 	Creat_List_Tail(&L);
 
 
-	int j = Get_Elem(L, 3);
-
 	ShowList(L);
 
-	printf("%d\n", j);
+	LNode *p = NULL;
 
+	p = LocateElem_Point(&L, 3);
+
+	printf("\nyour number is \n");
+	printf("%d\n", p->data);
 	
 
 	return 0;
@@ -173,9 +177,29 @@ bool Creat_List_Tail(LinkList *L)
 	return TRUE;
 }
 
-// 通过某一位置的data, i表示第几个元素
-int Get_Elem(LinkList L, int i)
+// 按位查找的指针函数, 通过位序返回节点
+LNode * GetElem_Point(LinkList *L, int i)
 {
+	if(i < 0)
+		return NULL;
+	LNode *p;	// p指针指向扫描的节点, 作为工作指针
+	int j = 0;
+	p = *L;
+	while(p != NULL && j < i){
+		p = p->next;
+		j ++;
+	}
+
+	return p;
+}
+
+
+
+// 按位查找, 通过位序找到data, i表示第几个元素
+int GetElem(LinkList L, int i)
+{
+	if(i < 0)
+		return FALSE;
 	int j = 0;
 	LinkList p;
 	p = L;
@@ -223,3 +247,15 @@ bool InsertPriorNode(LNode *p, ElemType *e)
 	return TRUE;
 }
 
+// 按值查找, 通过数据找到值为e的节点并且返回
+LNode *LocateElem_Point(LinkList *L, ElemType e)
+{
+	LNode *p = (*L)->next;
+	while(p != NULL && p->data != e){
+		p = p->next;
+	}
+	if(p == NULL)
+		return NULL;
+
+	return p;
+}
