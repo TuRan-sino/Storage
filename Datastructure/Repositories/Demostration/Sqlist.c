@@ -78,7 +78,7 @@ bool InitList(SqList *L)
 	(*L).length = 0;
 	(*L).Maxsize = INITSIZE;
 
-	return TRUE;;
+	return TRUE;
 }
 
 
