@@ -10,13 +10,21 @@
 #define TRUE 1
 #define FALSE 0
 
-typedef struct LNode{
+typedef stdbool ANode{
+	int row;	
+	int cloum;
+	int value;
+	struct LNode *next;
+	struct LNode *next;
+}ANode, *LinkList;
+
+typedef struct HNode{
 	int row;
 	int colum;
 	int value;
 	struct LNode *next;
 	struct LNode *down;
-}Node, *LinkList;
+}HNode, *LinkList;
 
 int main(int argc, char const *argv[])
 {
