@@ -30,4 +30,4 @@ autocrlf的工作原理<br>
 	* pull: none
 2. input
 	* push: ??? -> lf
-	* pull: none 
+	* pull: none
