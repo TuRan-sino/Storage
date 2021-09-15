@@ -38,20 +38,9 @@ int main(int argc, char const *argv[])
 	SqQueue Q;
 	InitQueue(&Q);	
 
-	printf("Please enter your number\n");
-			int z = 0;
-			scanf("%d", &z);
-			while(z != -9999){	
-				EnQueue(&Q, z);
-				scanf("%d", &z);
-			}
+	Select(&Q);
 
 
-
-
-	ElemType y = 0;	
-	OutQueue(&Q, &y);
-	printf("%d", y);
 
 	return 0;
 
@@ -166,12 +155,13 @@ bool DestoryQueue(SqQueue *Q)
 
 bool Select(SqQueue *Q)
 {
+	printf("Please down enter to start this program\n");
 	while(1){
 		char x;
 		getchar();
 		printf("Please enter your choice\n");
-		printf("a. Enqueue b. OutQueue\n");
-		printf("c. ShowQueue d. exit\n");
+		printf("a. Enqueue	b. OutQueue\n");
+		printf("c. ShowQueue	d. exit\n");	
 		scanf("%c", &x);
 		if(x == 'a'){
 			printf("Please enter your number\n");
@@ -181,15 +171,18 @@ bool Select(SqQueue *Q)
 				EnQueue(Q, y);
 				scanf("%d", &y);
 			}
+			printf("\n");
 		}else if(x == 'b'){
-			int *y = NULL;
-			OutQueue(Q, y);
-			printf("%d\n", *y);	
+			int y = 0;
+			OutQueue(Q, &y);
+			printf("your OutQueue number is %d\n", y);
+			printf("\n");
 		}else if(x == 'c'){
+			printf("Your queue is\n");
 			ShowQueue(*Q);
+			printf("\n");
 		}else if(x == 'd'){
 			return FALSE;
 		}
 	}
-
 }
