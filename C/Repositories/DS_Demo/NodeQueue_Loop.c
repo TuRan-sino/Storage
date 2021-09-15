@@ -52,6 +52,7 @@ int main(int argc, char const *argv[])
 	return 0;
 }
 
+// 初始化循环队列
 bool InitQueue(SqQueue *Q)
 {
 	(*Q).data = (ElemType *) malloc(sizeof(ElemType) * MaxSize);
@@ -62,6 +63,7 @@ bool InitQueue(SqQueue *Q)
 	return TRUE;
 }
 
+// 判断队空
 bool IfEmpty(SqQueue Q)
 {
 	if(Q.front == Q.rear){	// 初始化的时候设置对头和队尾指针都指向同一个为位置
@@ -92,6 +94,7 @@ bool OutQueue(SqQueue *Q, ElemType *x)
 	return TRUE;
 }
 
+// 获取队头元素
 bool GetHead(SqQueue Q, ElemType *x)
 {
 	if(Q.front == Q.rear)
@@ -101,6 +104,7 @@ bool GetHead(SqQueue Q, ElemType *x)
 	return TRUE;
 }
 
+// 求队长
 int QueueLength(SqQueue Q)
 {
 	int x = 0;
@@ -109,6 +113,7 @@ int QueueLength(SqQueue Q)
 	return x;
 }
 
+// 遍历队列并打印
 int ShowQueue(SqQueue Q)
 {
 	if(Q.front == Q.rear){
@@ -123,6 +128,7 @@ int ShowQueue(SqQueue Q)
 	return TRUE;
 }
 
+// 销毁队列
 bool DestoryQueue(SqQueue *Q)
 {
 	free(Q->data);

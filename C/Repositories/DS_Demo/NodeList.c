@@ -61,9 +61,9 @@ bool InitList(LinkList *L)						 //为什么 InitList 需要调用*，但是 Cre
 {												//CreatList_hand 返回值就是 LinkList 类型
 	*L = (LinkList) malloc(sizeof(LNode));
 	if(!L){
-		return FALSE;
+		return FALSE;							// 假设L不存在, 返回FALSE
 	}
-	(*L)->next = NULL;
+	(*L)->next = NULL;							// 初始化的时候设置头节点L的next域位NULL
 	return TRUE;
 }
 
@@ -72,13 +72,13 @@ bool InitList(LinkList *L)						 //为什么 InitList 需要调用*，但是 Cre
 bool DestoryList(LinkList L)
 {
 	LinkList temp;
-	if(L == NULL){
+	if(L == NULL){								// L == NULL 表示L是空表, 返回false, 不需要删除
 		return FALSE;
 	}
 	while(L){
-		temp = L->next;
+		temp = L->next;							// 设置一个新的LinkList指针变量temp, 使得temp指向L后面一个节点, 暂存头节点
 		free(L);
-		L = temp;
+		L = temp;								// 使得L指向之前暂存的L->next	
 	}
 	return TRUE;
 }
@@ -97,13 +97,13 @@ void ShowList(LinkList L)
 // 头插法创立链表
 bool Creat_List_Head(LinkList *L)
 {
-	LNode *s;
-	(*L)->next = NULL;
-	int x;
+	LNode *s;				// 即将插入的节点
+	(*L)->next = NULL;		// L为头节点, 使得L后面一个节点指向NULL
+	int x;					// 即将插入的数
 	scanf("%d", &x);
 	while(x != -9999){
-		s = (LNode *) malloc(sizeof(LNode));
-		s->data = x;
+		s = (LNode *) malloc(sizeof(LNode));		// 给之前申明的S节点动态的赋予空间
+		s->data = x;		
 		s->next = (*L)->next;
 		(*L)->next = s;
 		scanf("%d", &x);
@@ -113,15 +113,15 @@ bool Creat_List_Head(LinkList *L)
 }
 
 
-// 插入(基本), 在某一结点后插入一个新的节点
+// 插入(基本), 在某一结点后插入一个新的节点, i从0开始的
 bool InsertList_num_basic(LinkList L, int i, ElemType e)
 {
-	if(i < 1)
+	if(i < 1)		// i < 1 即代表: 在头节点前面插入节点, return FASLE
 		return FALSE;
 	LNode *p;
-	int j = 0;
-	p = L;
-	while(p != NULL && j < i - 1){
+	int j = 0;		// 工作计数器, 通过j找到要找到的那个节点
+	p = L;			// 工作LinkList指针, 通过p找到需要找到的那个节点
+	while(p != NULL && j < i - 1){		// 这里j < i - 1. (j是从0考试的, i也是从0开始的)我们需要找到i节点前面一个节点才好插入
 		p = p->next;
 		j ++;
 	}
@@ -130,7 +130,7 @@ bool InsertList_num_basic(LinkList L, int i, ElemType e)
 		return FALSE;
 	}
 
-	LNode *s = (LinkList) malloc(sizeof(LNode));
+	LNode *s = (LinkList) malloc(sizeof(LNode));	// 给即将插入的那个节点malloc一个存储空间
 	if(s == NULL){
 		return FALSE;
 	}
@@ -146,9 +146,9 @@ bool InsertList_num_basic(LinkList L, int i, ElemType e)
 int GetLength(LinkList L)
 {
 	LinkList p;
-	p = L->next;			//为什么要设置 p = L->next ;而不是 p = L？
-	int i = 0;				//因为 p = L->next 本身就是一个循环项了，i = 1！
-	while(p){
+	p = L->next
+	int i = 0;
+	while(p){		// 只要p存在, 就一直使p 指向 p->next
 		i ++;
 		p = p->next;		
 	}
@@ -160,16 +160,16 @@ int GetLength(LinkList L)
 bool Creat_List_Tail(LinkList *L)
 {
 	int x; 				// x 用于接受键盘输入
-	LNode *s, *r;
+	LNode *s, *r; 		// r指针始终指向链表的最后一个元素. s指针就是工作指针, 每次插进去的就是这个
 	r = (*L);
 	(*L)->next = NULL;
 	scanf("%d", &x);
 	while(x != -9999){
-		s = (LNode *) malloc(sizeof(LNode));	//建立尾节点
-		s->data = x;
-		s->next = r->next;
-		r->next = s;
-		r = s;
+		s = (LNode *) malloc(sizeof(LNode));	//建立尾节点, 动态malloc s指针
+		s->data = x;		// x为该节点的值, 附到s指针的data域
+		s->next = r->next;		// 新创建的指针的next域 指向 链表最后一个元素(r指针)的next域
+		r->next = s;		// s节点插入之前的链表的最后一个元素(节点插入之后链表的倒数第二个元素)的next域指向 s节点
+		r = s;		// 所有步骤进行完毕, 使得r指针指向s指针.
 		scanf("%d", &x);
 	}
 	

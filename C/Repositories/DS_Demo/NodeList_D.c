@@ -1,12 +1,11 @@
 /*
 	双链表
+	双链表就是既有 next域, 也有 prior域
 */
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include "../../../C/Lib/lib_c.h"
-
-
 
 
 typedef int ElemType;
