@@ -115,7 +115,7 @@ bool GetHead(SqQueue Q, ElemType *x)
 int QueueLength(SqQueue Q)
 {
 	int x = 0;		// 工作int ,用来记录队长
-	x = (Q.rear + MaxSize - Q.front) % MaxSize;
+	x = (Q.rear - Q.front + MaxSize) % MaxSize;
 	/*
 			
 	*/
