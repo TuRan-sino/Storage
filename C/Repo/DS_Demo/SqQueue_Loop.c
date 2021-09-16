@@ -41,6 +41,7 @@ int main(int argc, char const *argv[])
 	Select(&Q);
 
 
+	DestoryQueue(&Q);
 
 	return 0;
 
@@ -137,7 +138,6 @@ bool ShowQueue(SqQueue Q)
 	}
 
 	printf("\n");
-	printf("There is %d ElemType in this queue\n", i);
 
 	return TRUE;
 }
