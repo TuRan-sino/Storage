@@ -5,3 +5,4 @@
 *.~$lock
 test.c
 *.swp
+*.gch
