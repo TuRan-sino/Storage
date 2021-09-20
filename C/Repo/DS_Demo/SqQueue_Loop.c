@@ -1,9 +1,12 @@
 /*
-	顺序存储的循环队列, 先进先出.
-		本例中虽然没有表示next域, 但是可以知道的是
-	插入操作只能在队尾实现(rear), 删除操作只能在对头实现(front).
-	初始化的时候Q->front & Q->rear 都为0; 且Q->rear永远指向尾节点的下一个节点
-	不同普通循环队列的是: front & rear 在本例中都是 ++
+	顺序存储的循环队列, 先进先出(FIFO)
+	入队操作只能在队尾实现(rear), 出队操作只能在对头实现(front).
+	不同普通队列的是: front & rear 在本例中都是 ++
+
+	初始化: Q.front = Q.rear = 0
+		Q.rear始终指向尾指针的后面一个
+	判断队空: Q.front == Q.rear
+	判断队满: (Q->rear + 1 ) % MAXSIZE == Q->front
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -74,15 +77,15 @@ bool EnQueue(SqQueue *Q, ElemType x)
 		return FALSE;		
 	/*
 		(rear + 1) % MAXSIZE 也就是表示rear + 1 对MAXSIZE 取余.
-			MAXSIZE的作用: 因为本例是循环链表, 因此无论如何不可以超过MAXSIZE;
-			为什么不是Maxsize - 1? : 因为MAXSIZE是从1开始的(rear & front 是从0开始的), 
-				因此理论上的MAXSIZE(从0开始的话)为Maxsize - 1;
+		MAXSIZE的作用: 因为本例是循环链表, 因此无论如何Q->rear不可以超过MAXSIZE;
+		为什么不是Maxsize - 1? : 因为MAXSIZE是从1开始的(rear & front 是从0开始的), 
+			因此理论上的MAXSIZE(从0开始的话)为Maxsize - 1;
 			因此设置模的时候要将实际上的Maxsize 加上 1, 也就是MAXSIZE - 1 + 1 = MAXSIZE;
-				当rear = MAXSIZE - 1的时候相当于满了, 取余 = Maxsize - 1, 相当于满员;
-				当rear = MAXSIZE的时候超出一个, 取余 = 1;
-			eg: Maxsize = 10 实际的Maxsize(从0开始的话) = 9;
-			假设 	rear = 9 => 取余之后的rear = 9;
-					rear = 10 => 取余之后的rear = 0;
+			当rear = MAXSIZE - 1的时候相当于满了, 取余 = Maxsize - 1, 相当于满员;
+			当rear = MAXSIZE的时候超出一个, 取余 = 0, 相当于从头再次开始;
+		eg: Maxsize = 10 实际的Maxsize(从0开始的话) = 9;
+		假设 	rear = 9 => 取余之后的rear = 9;
+				rear = 10 => 取余之后的rear = 0;
 	*/
 	Q->data[Q->rear] = x;
 	Q->rear = (Q->rear + 1) % MAXSIZE;

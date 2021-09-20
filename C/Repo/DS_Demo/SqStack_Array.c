@@ -26,8 +26,8 @@ typedef struct SqStack{
 
 bool InitStack(SqStack *S);
 bool IfEmpty(SqStack S);
-bool pop(SqStack *S, ElemType x);
-bool push(SqStack *S, ElemType *x);
+bool push(SqStack *S, ElemType x);
+bool pop(SqStack *S, ElemType *x);
 bool GetHead(SqStack S, ElemType *x);
 bool ShowStack(SqStack S);
 
@@ -40,7 +40,7 @@ int main(int argc, char const *argv[])
 	int x = 0;
 	scanf("%d", &x);
 	while(x != -9999){
-		pop(&S, x);
+		push(&S, x);
 		scanf("%d", &x);
 	}
 
@@ -68,7 +68,7 @@ bool IfEmpty(SqStack S)
 }
 
 // 入栈
-bool pop(SqStack *S, ElemType x)
+bool push(SqStack *S, ElemType x)
 {
 	if(S->top >= MAXSIZE - 1)
 		return FALSE;
@@ -79,7 +79,7 @@ bool pop(SqStack *S, ElemType x)
 }
 
 // 出栈
-bool push(SqStack *S, ElemType *x)
+bool pop(SqStack *S, ElemType *x)
 {
 	if(S->top == -1)
 		return FALSE;
