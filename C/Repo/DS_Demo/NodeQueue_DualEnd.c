@@ -8,7 +8,7 @@
 
 #define TRUE 1
 #define FALSE 0
-#define MaxSize 20
+#define MAXSIZE 20
 
 typedef int ElemType;
 typedef struct LinkNode{

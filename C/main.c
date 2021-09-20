@@ -1,20 +1,12 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
-int main(void)
+int main(int argc, char const *argv[])
 {
-	int i = 0;
-	printf("Hello world\n");
+	
 
-	i ++;
-	i ++;
-	i ++;
-	i ++;
-	i ++;
-	i ++;
-	i ++;
-	i ++;
-	i ++;
-	i ++;
 
+	
 	return 0;
 }

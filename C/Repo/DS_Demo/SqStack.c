@@ -7,7 +7,7 @@
 
 #define TRUE 1
 #define FALSE 0
-#define MaxSize 20
+#define MAXSIZE 20
 #define INCREMENT_SIZE 10
 
 typedef int ElemType;
@@ -43,7 +43,7 @@ int main(int argc, char const *argv[])
 
 bool InitStack(SqStack *S)
 {
-	S->data = (ElemType *) malloc(sizeof(ElemType) * MaxSize);
+	S->data = (ElemType *) malloc(sizeof(ElemType) * MAXSIZE);
 	if(S->data == NULL){
 		return FALSE;
 	}
@@ -58,7 +58,7 @@ bool push(SqStack *S)
 {	
 	int e = 0;	
 	scanf("%d", &e);
-	if(S->top == MaxSize - 1){
+	if(S->top == MAXSIZE - 1){
 		return FALSE;
 	}else{
 		while(e != -9999){

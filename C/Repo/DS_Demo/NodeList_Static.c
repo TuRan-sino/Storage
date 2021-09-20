@@ -12,13 +12,13 @@
 
 #define TRUE 1
 #define FALSE 0
-#define MaxSize 20
+#define MAXSIZE 20
 
 typedef int ElemType;
 typedef struct SNode{
 	ElemType data;	// 数据元素
 	int next;		// 下一个元素的数组下标(游标)
-}SNode, SLinkList[MaxSize];
+}SNode, SLinkList[MAXSIZE];
 
 bool InitSNode(SLinkList *L);
 
@@ -35,10 +35,10 @@ int main(int argc, char const *argv[])
 // 初始化
 bool InitSNode(SLinkList *L)
 {
-	for(int i = 0; i < MaxSize; i ++){
+	for(int i = 0; i < MAXSIZE; i ++){
 		L[i]->data = -9999;				// 将脏数据设置为-9999
-		if(i == MaxSize - 1){
-			L[i]->next = -9999				// 最后一个节点的next域设置为-9999
+		if(i == MAXSIZE - 1){
+			L[i]->next = -9999;			// 最后一个节点的next域设置为-9999
 		}else
 			L[i]->next = L[i + 1];			// 初始化的时候将所有结点的的next域放置在该节点的下一个部分
 
@@ -49,8 +49,8 @@ bool InitSNode(SLinkList *L)
 
 bool InsertSNode(SLinkList *L)
 {		
-	int i = 0
-	for(i = 0; i < MaxSize; i ++){		// 找到第一个未被使用过的数据域
+	int i = 0;
+	for(i = 0; i < MAXSIZE; i ++){		// 找到第一个未被使用过的数据域
 		if(L[i] != -9999){
 			break;
 		}
@@ -62,7 +62,7 @@ bool InsertSNode(SLinkList *L)
 	}
 }
 
-bool Traverse(SLinkList L)
-{
+// bool Traverse(SLinkList L)
+// {
 
-}
+// }

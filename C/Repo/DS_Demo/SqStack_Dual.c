@@ -7,7 +7,7 @@
 
 #define TRUE 1
 #define FALSE 0
-#define MaxSize 20
+#define MAXSIZE 20
 #define STAR "********************"
 
 typedef int ElemType;
@@ -52,19 +52,19 @@ int main(int argc, char const *argv[])
 
 bool InitStack(DSqStack *S)
 {
-	(*S).data = (ElemType *) malloc(sizeof(ElemType) * MaxSize);
+	(*S).data = (ElemType *) malloc(sizeof(ElemType) * MAXSIZE);
 	if(!S->data){
 		return FALSE;
 	}
 	S->top_up = -1;
-	S->top_down = MaxSize;
+	S->top_down = MAXSIZE;
 
 	return TRUE;
 }
 
 bool IfEmpty(DSqStack S)
 {
-	if(S.top_up == -1 && S.top_down == MaxSize){
+	if(S.top_up == -1 && S.top_down == MAXSIZE){
 		return TRUE;
 	}else
 		return FALSE;
@@ -102,7 +102,7 @@ bool pop_up(DSqStack *S, ElemType *e)
 
 bool pop_down(DSqStack *S, ElemType *e)
 {
-	if(S->top_down == MaxSize){
+	if(S->top_down == MAXSIZE){
 		return FALSE;
 	}
 	*e = S->data[S->top_down ++];
@@ -112,7 +112,7 @@ bool pop_down(DSqStack *S, ElemType *e)
 
 bool ShowList(DSqStack S)
 {
-	if(S.top_up == -1 && S.top_down == MaxSize){
+	if(S.top_up == -1 && S.top_down == MAXSIZE){
 		return FALSE;
 	}
 	if(S.top_up == -1)
@@ -123,9 +123,9 @@ bool ShowList(DSqStack S)
 	printf("\n");
 break0:
 	puts(STAR);	
-	if(S.top_down == MaxSize)
+	if(S.top_down == MAXSIZE)
 		goto break1;
-	for(int j = MaxSize - 1; j >= S.top_down; j --){
+	for(int j = MAXSIZE - 1; j >= S.top_down; j --){
 		printf("%d\n", S.data[j]);
 	}
 	printf("\n");
@@ -138,7 +138,7 @@ break1:
 
 bool GetTop(DSqStack S, ElemType *m, ElemType *n)
 {
-	if(S.top_up == -1 && S.top_down == MaxSize){
+	if(S.top_up == -1 && S.top_down == MAXSIZE){
 		return FALSE;
 	}
 
@@ -148,7 +148,7 @@ bool GetTop(DSqStack S, ElemType *m, ElemType *n)
 		*m = S.data[S.top_up];
 	}
 
-	if(S.top_down == MaxSize){
+	if(S.top_down == MAXSIZE){
 		*n = -9999;
 	}else{
 		*n = S.data[S.top_down];
