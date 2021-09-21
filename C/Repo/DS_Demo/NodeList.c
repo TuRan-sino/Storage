@@ -18,6 +18,12 @@ typedef struct LNode{
 	ElemType data;
 	struct LNode *next;
 }LNode, *LinkList;
+/*
+	这里定义的LinkList是指针类型的LNode变量
+	因此:	假设这里有一个 LinkList L,
+			也就是LNode *L;
+			换言之就是定义了一个指针L, 指向了链表的头节点
+*/
 
 
 bool InitList(LinkList *L);
@@ -37,8 +43,8 @@ LNode *LocateElem_Point(LinkList *L, ElemType e);
 int main(int argc, char const *argv[])
 {
 
-	LinkList L;
-	InitList(&L);
+	LinkList L;			// LNode *L
+	InitList(&L);		// 给InitList传入的参数就是地址类型(指针). 相当于一个指针, 指针指向L的内存地址
 	printf("Plaese Enter your number\n");
 	Creat_List_Tail(&L);
 
@@ -57,8 +63,8 @@ int main(int argc, char const *argv[])
 }
 
 // 初始化
-bool InitList(LinkList *L)						 //为什么 InitList 需要调用*，但是 CreatList_hand 不需要*？
-{												//CreatList_hand 返回值就是 LinkList 类型
+bool InitList(LinkList *L)
+{	
 	*L = (LinkList) malloc(sizeof(LNode));
 	if(!L){
 		return FALSE;							// 假设L不存在, 返回FALSE
