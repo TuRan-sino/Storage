@@ -44,7 +44,7 @@ int main(int argc, char const *argv[])
 {
 
 	LinkList L;			// LNode *L
-	InitList(&L);		// 给InitList传入的参数就是地址类型(指针). 相当于一个指针, 指针指向L的内存地址
+	InitList(&L);		// 给InitList传入的参数就是LinkList L 的地址. 相当于一个指针, 指针指向L
 	printf("Plaese Enter your number\n");
 	Creat_List_Tail(&L);
 
@@ -69,7 +69,7 @@ bool InitList(LinkList *L)
 	if(!L){
 		return FALSE;							// 假设L不存在, 返回FALSE
 	}
-	(*L)->next = NULL;							// 初始化的时候设置头节点L的next域位NULL
+	(*L)->next = NULL;							// 初始化的时候设置头节点L的next域位NULL, tips: (*L)->next双重解引
 	return TRUE;
 }
 
