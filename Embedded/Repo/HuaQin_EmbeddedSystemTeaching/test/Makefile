@@ -1,6 +1,6 @@
 
 NAME := test
-CROESS_COMPILE := arm-none-linux-gnueabi-
+CROESS_COMPILE := arm-linux-gnueabihf-
 #======================================================================#
 CC := $(CROESS_COMPILE)gcc
 LD := $(CROESS_COMPILE)ld
