@@ -4,8 +4,12 @@
 #define TRUE 1
 #define FALSE 0
 
-bool InitList(LinkList *S)
 
+bool pop(LinkList *S, ElemType *e)
+bool push(LinkList *S, ElemType x)
+bool ShowList(LinkList S)
+bool BracketMatch(char *str)
+bool InitList(LinkList *S)
 int main(int argc, char const *argv[])
 {
 	

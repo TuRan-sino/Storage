@@ -151,7 +151,7 @@ bool InsertList_num_basic(LinkList L, int i, ElemType e)
 int GetLength(LinkList L)
 {
 	LinkList p;
-	p = L->next
+	p = L->next;
 	int i = 0;
 	while(p){		// 只要p存在, 就一直使p 指向 p->next
 		i ++;
