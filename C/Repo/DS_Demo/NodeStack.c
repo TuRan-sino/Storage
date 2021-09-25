@@ -26,18 +26,18 @@ typedef struct StackNode{
 }StackNode, *LinkList;
 
 
-bool InitList(LinkList *S);
+bool InitStack(LinkList *S);
 bool ShowList(LinkList S);
 bool GetTop(LinkList S, ElemType *e);
 bool pop(LinkList *S, ElemType *e);
 bool DestoryList(LinkList S);
 bool push(LinkList *S, ElemType x);
-
+bool IfEmpty(LinkList S);
 
 int main(int argc, char const *argv[])
 {
 	LinkList S;
-	InitList(&S);
+	InitStack(&S);
 
 	printf("Please enter your number\n");
 	int x = 0;
@@ -54,11 +54,17 @@ int main(int argc, char const *argv[])
 
 	ShowList(S);
 
+	if(IfEmpty(S)){
+		printf("NULL\n");
+	}else{
+		printf("UNNULL\n");
+	}
+
 	DestoryList(S);
 }
 
 // 初始化栈
-bool InitList(LinkList *S)
+bool InitStack(LinkList *S)
 {
 	(*S) = (StackNode *) malloc(sizeof(StackNode));		// 为S分配新的物理空间
 	(*S)->next = NULL;		// 是S->next == NULL, 老生常谈了
@@ -133,9 +139,17 @@ bool pop(LinkList *S, ElemType *e)
 	}
 	StackNode *p = (*S)->next;		// 声明一个新的节点指向S->next
 	(*S)->next = p->next;		// S->next = p->next = S->next->next, 也就是S->next指向S的下下个节点
-	*e = p->data;		// 传出出战节点的值
+	*e = p->data;		// 传出出栈节点的值
 	free(p);
 
 	return FALSE;
 }
 
+// 判断栈是否为空栈
+bool IfEmpty(LinkList S)
+{
+	if(S->next == NULL)			// 假设是空栈 =》 返回：TRUE
+		return TRUE;
+	else						// 假设不是空栈 =》 返回： FALSE
+		return FALSE;
+}

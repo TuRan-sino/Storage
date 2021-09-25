@@ -1,27 +1,40 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #define TRUE 1
 #define FALSE 0
+#define MAXSIZE 20
 
+typedef int ElemType;
+typedef struct StackNode{
+	ElemType data;
+	struct StackNode *next;
+}StackNode, *LinkList;
 
-bool pop(LinkList *S, ElemType *e)
-bool push(LinkList *S, ElemType x)
-bool ShowList(LinkList S)
-bool BracketMatch(char *str)
-bool InitList(LinkList *S)
+bool pop(LinkList *S, ElemType *e);
+bool push(LinkList *S, ElemType x);
+bool ShowList(LinkList S);
+bool BracketMatch(char *str);
+bool InitStack(LinkList *S);
+bool IfEmpty(LinkList S);
+
 int main(int argc, char const *argv[])
 {
-	
+	char str[MAXSIZE];
+	scanf("%s", str);
+
+	BracketMatch(str);
 
 	return 0;
 }
 
 bool BracketMatch(char *str)
 {
+	LinkList S;
 	InitStack(&S);
 	int i = 0;		// 工作变量: 计数器
-	int e = 0;		// 工作变量: 暂存器
+	ElemType e = 0;		// 工作变量: 暂存器
 	while(str[i] != '\0'){
 		switch(str[i]){
 			case '(': push(&S, '('); break;
@@ -53,7 +66,7 @@ bool BracketMatch(char *str)
 	}
 }
 
-bool InitList(LinkList *S)
+bool InitStack(LinkList *S)
 {
 	(*S) = (StackNode *) malloc(sizeof(StackNode));		// 为S分配新的物理空间
 	(*S)->next = NULL;		// 是S->next == NULL, 老生常谈了
@@ -102,4 +115,13 @@ bool pop(LinkList *S, ElemType *e)
 	free(p);
 
 	return FALSE;
+}
+
+// 判断栈空
+bool IfEmpty(LinkList S)
+{
+	if(S->next == NULL)
+		return TRUE;
+	else 
+		return FALSE;
 }
