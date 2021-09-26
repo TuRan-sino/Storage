@@ -1,3 +1,6 @@
+/*
+	括号匹配程序
+*/
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -12,7 +15,7 @@ typedef struct{
 	int top;
 }SqStack;
 typedef struct{
-	char *data;				
+	char *data;
 	int Maxsize;			
 	int length;				
 }SqList;

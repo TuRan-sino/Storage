@@ -1,3 +1,7 @@
+/*
+	用数组定义的括号匹配程序
+	!!!! 不知道为什么, 只能匹配(), 不能匹配{} & []
+*/
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -23,6 +27,7 @@ int main(int argc, char const *argv[])
 {
 	char str[MAXSIZE];
 	scanf("%s", str);
+	printf("result: %s\n", str);
 
 	BracketMatch(str);
 
@@ -38,30 +43,31 @@ bool BracketMatch(char *str)
 	while(str[i] != '\0'){
 		switch(str[i]){
 			case '(': push(&S, '('); break;
-			case '[': push(&S, '('); break;
+			case '[': push(&S, '['); break;
 			case '{': push(&S, '{'); break;
 			// 遇到左括号的时候将左括号入栈
 			case ')': pop(&S, &e);
 				if(e != '(')
-					return FALSE;
+					goto break0;
 				break;
 			case ']': pop(&S, &e);
 				if(e != '[')
-					return FALSE;
+					goto break0;
 				break;
 			case '}': pop(&S, &e);
-				if(e != '}')
-					return FALSE;
+				if(e != '{')
+					goto break0;
 				break;
 			default : break; 
 		}
 		i ++;
 	}
-	if(!IfEmpty(S)){
-		printf("括号不匹配\n");
+break0:	
+	if(IfEmpty(S)){
+		printf("match\n");
 		return FALSE;
 	}else{
-		printf("括号匹配\n");
+		printf("unmatch\n");
 		return TRUE;
 	}
 }
@@ -109,12 +115,12 @@ bool pop(LinkList *S, ElemType *e)
 	if((*S)->next == NULL){
 		return FALSE;
 	}
-	StackNode *p = (*S)->next;		// 声明一个新的节点指向S->next
+	StackNode *p = (*S)->next;		// 声明一个新的指针指向S->next
 	(*S)->next = p->next;		// S->next = p->next = S->next->next, 也就是S->next指向S的下下个节点
 	*e = p->data;		// 传出出战节点的值
 	free(p);
 
-	return FALSE;
+	return TRUE;
 }
 
 // 判断栈空

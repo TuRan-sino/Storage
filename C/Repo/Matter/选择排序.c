@@ -14,7 +14,7 @@ eg:
 */
 #include <stdio.h>
 #include <string.h>
-#include "D:\Project\C\lib\lib_c.h"
+#include "D:\Work\Storage\C\lib\lib_c.h"
 
 #define SIZE 81
 #define LIM 20
