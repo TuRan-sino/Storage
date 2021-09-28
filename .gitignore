@@ -1,8 +1,5 @@
-*.[oa]
-*~
+*.a
 *.exe
+*~
 *.out
-*.~$lock
 test.c
-*.swp
-*.gch
