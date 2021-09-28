@@ -1,5 +1,4 @@
-
-NAME := test
+NAME := main
 CROESS_COMPILE := arm-linux-gnueabihf-
 #======================================================================#
 CC := $(CROESS_COMPILE)gcc

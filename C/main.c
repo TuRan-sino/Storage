@@ -1,8 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#define TRUE 1
+#define FALSE 0
 
 int main(int argc, char const *argv[])
 {
-	char x = '{';  
-
-	printf("result : %d\n", x);
+	printf("%d", TRUE);	
 }

@@ -5,7 +5,7 @@ int Fibonaci(int n);
 int main(int argc, char const *argv[])
 {
 	
-	int x = Fibonaci(4);
+	int x = Fibonaci(8);
 	printf("%d\n", x);
 
 
