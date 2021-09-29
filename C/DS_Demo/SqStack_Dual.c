@@ -116,22 +116,22 @@ bool ShowList(DSqStack S)
 		return FALSE;
 	}
 	if(S.top_up == -1)
-		goto break0;
+		goto out0;
 	for(int i = 0; i <= S.top_up; i ++){
 		printf("%d ", S.data[i]);
 	}
 	printf("\n");
-break0:
+out0:
 	puts(STAR);	
 	if(S.top_down == MAXSIZE)
-		goto break1;
+		goto out1;
 	for(int j = MAXSIZE - 1; j >= S.top_down; j --){
 		printf("%d\n", S.data[j]);
 	}
 	printf("\n");
 
 
-break1:
+out1:
 
 	return TRUE;
 }

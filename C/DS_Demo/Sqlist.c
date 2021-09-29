@@ -454,33 +454,33 @@ bool test_10(SqList *L, int p)
 }
 
 
-/*
-	找出两个顺序序列合并之后的中位数
-*/
-bool test_11_basic(SqList *N, SqList *M)
-{
-	int length_N = N->length;
-	int length_M = M->length;
-	int temp;
-	int length = length_N + length_M;
-	int n = 0, m = 0;
-	for(int i = 0; i <= length / 2 - 1; i ++){
-		if(N->data[n] < M->data[m]){
-			temp = N->data[n];
-			n ++;
-		}else if(M->data[m] < N->data[n]){
-			temp = M->data[m];
-			m ++;
-		}else if(N->data[n] == M->data[m]){
-			temp = N->data[n];
-			n ++;
-		}
-	}
-	printf("%d\n", temp);
+// /*
+// 	找出两个顺序序列合并之后的中位数
+// */
+// bool test_11_basic(SqList *N, SqList *M)
+// {
+// 	int length_N = N->length;
+// 	int length_M = M->length;
+// 	int temp;
+// 	int length = length_N + length_M;
+// 	int n = 0, m = 0;
+// 	for(int i = 0; i <= length / 2 - 1; i ++){
+// 		if(N->data[n] < M->data[m]){
+// 			temp = N->data[n];
+// 			n ++;
+// 		}else if(M->data[m] < N->data[n]){
+// 			temp = M->data[m];
+// 			m ++;
+// 		}else if(N->data[n] == M->data[m]){
+// 			temp = N->data[n];
+// 			n ++;
+// 		}
+// 	}
+// 	printf("%d\n", temp);
 
 
-	return TRUE;
-}
+// 	return TRUE;
+// }
 
 
 /*

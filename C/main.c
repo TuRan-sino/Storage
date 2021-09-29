@@ -7,5 +7,10 @@
 
 int main(int argc, char const *argv[])
 {
-	printf("%d", TRUE);	
+	int i = 0;
+	if(i == 0){
+		printf("hrllo");
+	}elseif(i == 1){
+		printf("hah");
+	}
 }

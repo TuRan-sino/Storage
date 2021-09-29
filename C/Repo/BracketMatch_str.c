@@ -48,21 +48,21 @@ bool BracketMatch(char *str)
 			// 遇到左括号的时候将左括号入栈
 			case ')': pop(&S, &e);
 				if(e != '(')
-					goto break0;
+					goto out1;
 				break;
 			case ']': pop(&S, &e);
 				if(e != '[')
-					goto break0;
+					goto out1;
 				break;
 			case '}': pop(&S, &e);
 				if(e != '{')
-					goto break0;
+					goto out1;
 				break;
 			default : break; 
 		}
 		i ++;
 	}
-break0:	
+out1:	
 	if(IfEmpty(S)){
 		printf("match\n");
 		return FALSE;
