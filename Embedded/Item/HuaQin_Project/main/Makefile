@@ -1,5 +1,5 @@
 NAME := main
-CROESS_COMPILE := arm-linux-gnueabihf-
+CROESS_COMPILE := arm-linux-
 #======================================================================#
 CC := $(CROESS_COMPILE)gcc
 LD := $(CROESS_COMPILE)ld
