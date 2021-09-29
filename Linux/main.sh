@@ -1,0 +1,2 @@
+var="helloworld"
+echo ${var}
