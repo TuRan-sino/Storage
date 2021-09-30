@@ -22,29 +22,29 @@ int main(int argc, char const *argv[])
 
 int get_choice(void)
 {
-	int ch;
+	int temp;
 	printf("Please enter the letter of your choice\n");
 	printf("a.adive		b.bell\n");
 	printf("c.count 	q.quit\n");
-	ch = get_frist();
-	while((ch < 'a' || ch > 'c') && ch != 'q'){
+	temp = get_frist();
+	while((temp < 'a' || temp > 'c') && temp != 'q'){
 		printf("Please enter with a, b, c, q\n");
-		ch = get_frist();
+		temp = get_frist();
 	}
 
-	return ch;
+	return temp;
 }
 
 int get_frist()
 {	
 	fflush(stdin);
-	int ch;
-	ch = getchar();
+	int temp;
+	temp = getchar();
 	while(getchar() != '\n'){
 		continue;
 	}
 
-	return ch;
+	return temp;
 }
 
 void count(void)

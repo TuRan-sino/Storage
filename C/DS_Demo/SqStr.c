@@ -16,6 +16,7 @@ char[0]位置作为空位(为的是让数组下标(从0开始) & 位序(从1开�
 #include <stdlib.h>
 #include <stdbool.h>
 
+#define STAR "********************"
 #define TRUE 1
 #define FALSE 0
 #define MAXSIZE 255		// 定义线性表的最大长度
@@ -32,17 +33,127 @@ typedef struct HSqStr{
 }HSqStr;
 // 动态分配数组, 使用堆分配的方式存储数据. (使用之后记得要free)
 
+int StrLength(HSqStr S);
+bool DestoryStr(HSqStr *S);
+bool StrClean(HSqStr *S);
+bool IfEmpty(HSqStr S);
+bool StrCpoy(HSqStr *T, HSqStr S);
+bool InitStr(HSqStr *S);
+bool ShowStr(HSqStr S);
+bool StrAssgin(HSqStr *S, char *str);
+bool StrConcat(HSqStr *T, HSqStr S, HSqStr R);
+
 int main(int argc, char const *argv[])
 {
+	HSqStr S, T;
+	HSqStr result;
+	InitStr(&S);
+	InitStr(&T);
+	InitStr(&result);
+	char str0[MAXSIZE] = "1234 ";
+	char str1[MAXSIZE] = "5678."; 
+
+	StrAssgin(&S, str0);
+	StrAssgin(&T, str1);
+	
+
+	StrConcat(&result, S, T);
+
+	ShowStr(result);
+
+
 
 	return 0;
 }
 
-// // 初始化串
-// bool InitStr()
-// {
+// 初始化串
+bool InitStr(HSqStr *S)
+{
+	S->length = 0;
+	S->data = (char *) malloc(sizeof(char) * MAXSIZE);
+if(!S->data)
+		return FALSE;
 
-// }
+	return TRUE;
+
+}
+
+// 串赋值操作
+bool StrAssgin(HSqStr *S, char *str)
+{
+	int i = 1, j = 0;
+	while(str[j] != '\0'){
+		S->data[i] = str[j];
+		i ++;
+		j ++;
+		S->length ++;
+	}
+	
+
+	return TRUE;
+}
+
+// 串拷贝操作. 将串S拷贝到串T
+bool StrCpoy(HSqStr *T, HSqStr S)
+{
+	if(T->data == NULL || S.data == NULL)
+		return FALSE;
+	for(int i = 1; i <= S.length; i ++){
+		T->data[i] = S.data[i];
+	}
+
+	T->length = S.length;
+
+	return TRUE;
+}
+
+// 判空
+bool IfEmpty(HSqStr S)
+{
+	if(S.length == 0)
+		return TRUE;
+	else 
+		return FALSE;
+}
+
+// 清空串
+bool StrClean(HSqStr *S)
+{
+	S->length = 0;
+
+	return TRUE;
+}
+
+// 销毁串
+bool DestoryStr(HSqStr *S)
+{
+	free(S->data);
+	S->length = 0;
+
+	return TRUE;
+}
+
+// 连接为新串. 将串S1 & S2 链接为一个新串 T
+bool StrConcat(HSqStr *T, HSqStr S, HSqStr R)
+{	
+	int i = 0;
+	int j = 0;
+	if(S.length + R.length - 1 > MAXSIZE)
+		return FALSE;
+	for(i = 1; i <= S.length; i ++){
+		T->data[i] = S.data[i];
+		T->length ++;
+	}
+	j = T->length + 1;
+	for(i = 1; i <= R.length; i ++){
+		T->data[j] = R.data[i];
+		T->length ++;
+		j ++;
+	}
+
+	return TRUE;
+
+}
 
 int StrLength(HSqStr S)
 {
@@ -104,4 +215,17 @@ int Index(HSqStr S, HSqStr T)
 	}
 
 	return 0;
+}
+
+// 遍历队列并且输出
+bool ShowStr(HSqStr S)
+{
+	if(S.length < 1)
+		return FALSE;
+	for(int i = 1; i <= S.length; i ++){
+		printf("%c", S.data[i]);
+	}
+	putchar('\n');
+
+	return TRUE;
 }

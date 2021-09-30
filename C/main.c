@@ -7,10 +7,8 @@
 
 int main(int argc, char const *argv[])
 {
-	int i = 0;
-	if(i == 0){
-		printf("hrllo");
-	}elseif(i == 1){
-		printf("hah");
-	}
+	char str[255];
+	scanf("%s", str);
+	printf("This is result :\n");
+	printf("%s", str);	
 }
