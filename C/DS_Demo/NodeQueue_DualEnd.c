@@ -11,13 +11,13 @@
 #define MAXSIZE 20
 
 typedef int ElemType;
-typedef struct LinkNode{
+typedef struct QNode{
 	ElemType data;
-	struct LinkNode *next;
-}LinkNode;
+	struct QNode *next;
+}QNode;
 typedef struct{
-	LinkNode *front;
-	LinkNode *rear;
+	QNode *front;
+	QNode *rear;
 	int length;			// length表示当前节点个数
 }LinkQueue;
 
@@ -32,7 +32,7 @@ int main(int argc, char const *argv[])
 
 bool InitQueue(LinkQueue *Q)
 {
-	Q->rear = Q->front = (LinkNode *) malloc(sizeof(LinkNode));
+	Q->rear = Q->front = (QNode *) malloc(sizeof(QNode));
 	if(Q->front == NULL || Q->rear == NULL)
 		return FALSE;
 	else

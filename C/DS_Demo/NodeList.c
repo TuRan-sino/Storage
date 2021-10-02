@@ -29,9 +29,9 @@ bool InitList(LinkList *L);
 bool DestoryList(LinkList L);
 void ShowList(LinkList L);
 bool InsertList_num_basic(LinkList L, int i, ElemType e);
-bool Creat_List_Head(LinkList *L);
+bool CreatList_Head(LinkList *L);
 int GetLength(LinkList L);
-bool Creat_List_Tail(LinkList *L);
+bool CreatList_Tail(LinkList *L);
 int GetElem(LinkList L, int i);
 bool Delet_Elem(LinkList L, int i, ElemType *e);
 bool InsertPriorNode(LNode *p, ElemType *e);
@@ -45,18 +45,12 @@ int main(int argc, char const *argv[])
 	LinkList L;			// LNode *L
 	InitList(&L);		// 给InitList传入的参数就是LinkList L 的地址. 相当于一个指针, 指针指向L
 	printf("Plaese Enter your number\n");
-	Creat_List_Tail(&L);
+	CreatList_Tail(&L);
 
 
 	ShowList(L);
 
-	LNode *p = NULL;
 
-	p = LocateElem_Point(&L, 3);
-
-	printf("\nyour number is \n");
-	printf("%d\n", p->data);
-	
 
 	return 0;
 }
@@ -65,7 +59,7 @@ int main(int argc, char const *argv[])
 bool InitList(LinkList *L)
 {	
 	*L = (LinkList) malloc(sizeof(LNode));
-	if(!L){
+	if(!*L){
 		return FALSE;							// 假设L不存在, 返回FALSE
 	}
 	(*L)->next = NULL;							// 初始化的时候设置头节点L的next域位NULL, tips: (*L)->next双重解引
@@ -100,7 +94,7 @@ void ShowList(LinkList L)
 
 
 // 头插法创立链表
-bool Creat_List_Head(LinkList *L)
+bool CreatList_Head(LinkList *L)
 {
 	LNode *s;				// 即将插入的节点
 	(*L)->next = NULL;		// L为头节点, 使得L后面一个节点指向NULL
@@ -162,12 +156,11 @@ int GetLength(LinkList L)
 }
 
 // 尾插法创立链表
-bool Creat_List_Tail(LinkList *L)
+bool CreatList_Tail(LinkList *L)
 {
 	int x; 				// x 用于接受键盘输入
 	LNode *s, *r; 		// r指针始终指向链表的最后一个元素. s指针就是工作指针, 每次插进去的就是这个
 	r = (*L);
-	(*L)->next = NULL;
 	scanf("%d", &x);
 	while(x != -9999){
 		s = (LNode *) malloc(sizeof(LNode));	//建立尾节点, 动态malloc s指针

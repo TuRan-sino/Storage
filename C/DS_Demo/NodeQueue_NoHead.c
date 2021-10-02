@@ -12,13 +12,13 @@
 #define FALSE 0
 
 typedef int ElemType;
-typedef struct LinkNode{	// 链式结点
+typedef struct QNode{	// 链式结点
 	ElemType data;
-	struct LinkNode *next;
-}LinkNode;
+	struct QNode *next;
+}QNode;
 typedef struct{				// 队列结点
-	LinkNode *front;
-	LinkNode *rear;
+	QNode *front;
+	QNode *rear;
 }LinkQueue;
 
 bool InitQueue(LinkQueue *Q);
@@ -63,7 +63,7 @@ bool IfEmpty(LinkQueue Q)
 
 bool EnQueue(LinkQueue *Q, ElemType x)
 {
-	LinkNode *s = (LinkNode *) malloc(sizeof(LinkNode));
+	QNode *s = (QNode *) malloc(sizeof(QNode));
 	s->data = x;
 	s->next = NULL;
 	if(Q->front == NULL){	// 链队列为空的情况下	
@@ -81,7 +81,7 @@ bool OutQueue(LinkQueue *Q, ElemType *x)
 {
 	if(IfEmpty(*Q) == TRUE)
 		return FALSE;
-	LinkNode *temp = Q->front;
+	QNode *temp = Q->front;
 	*x = temp->data;
 	Q->front = temp->next;
 	if(Q->rear == temp){
@@ -95,7 +95,7 @@ bool OutQueue(LinkQueue *Q, ElemType *x)
 
 bool ShowQueue(LinkQueue Q)
 {
-	LinkNode *temp;
+	QNode *temp;
 	temp = Q.front;
 	if(Q.front == NULL)
 		return FALSE;

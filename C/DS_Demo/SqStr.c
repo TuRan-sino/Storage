@@ -6,11 +6,7 @@
 2. HSqStr => Heap Sequence string(堆分配顺序串)
 
 三. 存储方式
-char[0]位置作为空位(为的是让数组下标(从0开始) & 位序(从1开始)能够对应起来).
-
-四. 函数执行方式
-1. substring
-	 
+char[0]位置作为空位(为的是让数组下标(从0开始) & 位序(从1开始)能够对应起来).	 
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -42,6 +38,7 @@ bool InitStr(HSqStr *S);
 bool ShowStr(HSqStr S);
 bool StrAssgin(HSqStr *S, char *str);
 bool StrConcat(HSqStr *T, HSqStr S, HSqStr R);
+int Index_Simple(HSqStr S, HSqStr T);
 
 int main(int argc, char const *argv[])
 {
@@ -50,18 +47,18 @@ int main(int argc, char const *argv[])
 	InitStr(&S);
 	InitStr(&T);
 	InitStr(&result);
-	char str0[MAXSIZE] = "1234 ";
-	char str1[MAXSIZE] = "5678."; 
+	char str0[MAXSIZE] = "12345678 ";
+	char str1[MAXSIZE] = "567"; 
 
 	StrAssgin(&S, str0);
 	StrAssgin(&T, str1);
 	
-
-	StrConcat(&result, S, T);
-
-	ShowStr(result);
+	int i = Index_Simple(S, T);
+	printf("%d\n", i);
 
 
+	DestoryStr(&S);
+	DestoryStr(&S);
 
 	return 0;
 }
@@ -71,7 +68,7 @@ bool InitStr(HSqStr *S)
 {
 	S->length = 0;
 	S->data = (char *) malloc(sizeof(char) * MAXSIZE);
-if(!S->data)
+	if(!S->data)
 		return FALSE;
 
 	return TRUE;
@@ -81,8 +78,8 @@ if(!S->data)
 // 串赋值操作
 bool StrAssgin(HSqStr *S, char *str)
 {
-	int i = 1, j = 0;
-	while(str[j] != '\0'){
+	int i = 1, j = 0;		// 计数器j目标是: char str, 计数器i目标是: S串
+	while(str[j] != '\0'){		// 从第0未开始, 一直到最后一位(\n)之前	
 		S->data[i] = str[j];
 		i ++;
 		j ++;
@@ -96,9 +93,9 @@ bool StrAssgin(HSqStr *S, char *str)
 // 串拷贝操作. 将串S拷贝到串T
 bool StrCpoy(HSqStr *T, HSqStr S)
 {
-	if(T->data == NULL || S.data == NULL)
+	if(T->data == NULL || S.data == NULL)		// 假设T串和和S串中有一个是空串, 返回false
 		return FALSE;
-	for(int i = 1; i <= S.length; i ++){
+	for(int i = 1; i <= S.length; i ++){		// 从1开始复制所有的数据
 		T->data[i] = S.data[i];
 	}
 
@@ -120,6 +117,7 @@ bool IfEmpty(HSqStr S)
 bool StrClean(HSqStr *S)
 {
 	S->length = 0;
+	// clean只需要将Length设置为0就完事了, 因为S串里面的空数据基本上不需要你管
 
 	return TRUE;
 }
@@ -136,16 +134,16 @@ bool DestoryStr(HSqStr *S)
 // 连接为新串. 将串S1 & S2 链接为一个新串 T
 bool StrConcat(HSqStr *T, HSqStr S, HSqStr R)
 {	
-	int i = 0;
-	int j = 0;
-	if(S.length + R.length - 1 > MAXSIZE)
+	int i = 0;		// 计数器1
+	int j = 0;		// 计数器2
+	if(S.length + R.length - 1 > MAXSIZE)		// 假设S和R串的长度大于maxsize, 返回flase
 		return FALSE;
-	for(i = 1; i <= S.length; i ++){
+	for(i = 1; i <= S.length; i ++){		// 首先将S串的所有内容复制到T串中
 		T->data[i] = S.data[i];
 		T->length ++;
 	}
-	j = T->length + 1;
-	for(i = 1; i <= R.length; i ++){
+	j = T->length + 1;		// 复制R串的计数器j从T的最后一位的后面一位开始
+	for(i = 1; i <= R.length; i ++){		// 之后将R串的所有内容复制到T串中
 		T->data[j] = R.data[i];
 		T->length ++;
 		j ++;
@@ -228,4 +226,25 @@ bool ShowStr(HSqStr S)
 	putchar('\n');
 
 	return TRUE;
+}
+
+// 朴素模式匹配算法
+int Index_Simple(HSqStr S, HSqStr T)
+{
+	int i = 0;		// 工作指针: 用来指向当先子串的头
+	int m = i, n = 1;		// m: 用来指向子串的的data[m]; n: 用来指向模式串的data[n]
+	while(m <= S.length && n <= T.length){		// 假设m或者n有任何一个超过了length, 跳出循环
+		if(S.data[m] == T.data[n]){		// 当前二者指向的字符, 相同: 匹配下一个字符; 不同: i++, 重新判断
+			m ++;
+			n ++;
+		}else{
+			i ++;
+			m = i;
+			n = 1;
+		}
+	}
+	if(n > T.length)		// 防止while循环结束是因为 子串提前结束 而结束的
+		return 	i;
+	else
+		return 0;
 }

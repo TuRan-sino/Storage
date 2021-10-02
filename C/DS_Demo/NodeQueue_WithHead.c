@@ -14,13 +14,13 @@
 #define FALSE 0
 
 typedef int ElemType;
-typedef struct LinkNode{	// 链式结点
+typedef struct QNode{	// 链式结点
 	ElemType data;
-	struct LinkNode *next;
-}LinkNode;
+	struct QNode *next;
+}QNode;
 typedef struct{				// 队列结点
-	LinkNode *front;
-	LinkNode *rear;
+	QNode *front;
+	QNode *rear;
 }LinkQueue;
 
 bool InitQueue(LinkQueue *Q);
@@ -50,7 +50,7 @@ int main(int argc, char const *argv[])
 
 bool InitQueue(LinkQueue *Q)
 {	
-	Q->front = Q->rear = (LinkNode *) malloc(sizeof(LinkNode));
+	Q->front = Q->rear = (QNode *) malloc(sizeof(QNode));
 	if(Q->front == NULL || Q->rear == NULL)
 		return FALSE;
 	Q->front->next = NULL;
@@ -68,7 +68,7 @@ bool IfEmpty(LinkQueue Q)
 
 bool EnQueue(LinkQueue *Q, ElemType x)
 {
-	LinkNode *s = (LinkNode *) malloc(sizeof(LinkNode));
+	QNode *s = (QNode *) malloc(sizeof(QNode));
 	if(s == NULL){
 		return FALSE;
 	}
@@ -84,7 +84,7 @@ bool OutQueue(LinkQueue *Q, ElemType *x)
 {
 	if(IfEmpty(*Q) == 1)
 		return FALSE;
-	LinkNode *temp;
+	QNode *temp;
 	temp = Q->front->next;
 	*x = Q->front->next->data;
 	Q->front->next = Q->front->next->next;
@@ -98,7 +98,7 @@ bool OutQueue(LinkQueue *Q, ElemType *x)
 
 bool ShowQueue(LinkQueue Q)
 {
-	LinkNode *temp;
+	QNode *temp;
 	temp = Q.front;
 	if(Q.rear == Q.front)
 		return FALSE;
