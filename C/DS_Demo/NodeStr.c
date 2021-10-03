@@ -28,19 +28,23 @@ typedef struct Head{
 bool InitStr(LinkList *S);
 bool StrAssgin(LinkList *S, char *str);
 bool ShowStr(LinkList S);
+bool DestoryStr(LinkList *S);
 
 int main(int argc, char const *argv[])
 {
 	LinkList S;
 	InitStr(&S);
-	char str[255];
-	printf("Please enter your number\n");
-	scanf("%s", str);
-	printf("This is your result: ");
-	
-	StrAssgin(&S, str);
+	InitStr(&R);
+	InitStr(&T);
+	char str0[MAXSIZE] = "wodiaoni";
+	char str1[MAXSIZE] = "made";	
+	StrAssgin(&S, *str0);
+	StrAssgin(&S, *str1);
 
-	ShowStr(S);
+	StrConcat(&T, S, R);
+
+
+
 	return 0;
 }
 
@@ -74,10 +78,23 @@ bool ShowStr(LinkList S)
 	return TRUE;
 }
 
+// 销毁串
+bool DestoryStr(LinkList *S)
+{
+	if((*S)->length == 0){
+		return FALSE;
+	}
+	StNode *p = (*S)->next;
+	StNode *temp = p;
+	while(temp->next != NULL){
+		p = temp->next;
+		free(temp);
+		temp = p;
+	}
+	free(*S);
 
-// bool DestoryStr(LinkList *S)
-// {
-// }
+	return TRUE;
+}
 
 
 bool StrAssgin(LinkList *S, char *str)
@@ -106,6 +123,36 @@ bool StrAssgin(LinkList *S, char *str)
 			i ++;
 		}
 	}	
+
+	return TRUE;
+}
+
+// 判空操作
+bool IfEmpty(LinkList S)
+{
+	if(S->length == 0)
+		return TRUE;
+	else
+		return FALSE;
+}
+
+
+// 
+// bool StrClean()
+
+// 将两个模式串R & S 链接为一个串T
+bool StrConcat(LinkList *T, LinkList S, LinkList R)
+{
+	int length = S.length + R.length;
+	int i = 0;
+	while((*T)->length <= length){
+		for(i; i < S->length; i ++){
+			
+
+		}
+	}
+
+
 
 	return TRUE;
 }
