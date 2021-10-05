@@ -22,7 +22,7 @@ bool IfEmpty(SqStack S);
 bool push(SqStack *S);
 bool pop(SqStack *S, ElemType *e);
 bool GetTop(SqStack S, ElemType *e);
-bool ShowList_TopToDown(SqStack S);
+bool ShowList(SqStack S);
 
 int main(int argc, char const *argv[])
 {
@@ -36,7 +36,7 @@ int main(int argc, char const *argv[])
 
 	pop(&S, &e);
 
-	ShowList_TopToDown(S);
+	ShowList(S);
 
 	return 0;
 }
@@ -103,7 +103,7 @@ bool GetTop(SqStack S, ElemType *e)
 }
 
 
-bool ShowList_TopToDown(SqStack S)
+bool ShowList(SqStack S)
 {
 	if(S.top == -1){
 		return FALSE;

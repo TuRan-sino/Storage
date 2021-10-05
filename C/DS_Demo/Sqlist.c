@@ -30,12 +30,12 @@ bool ChangeList(SqList *L);
 bool DestroyList(SqList *L);
 bool Delet_Elem_similar_x(SqList *L, int x);
 bool InsertElem(SqList *L, int i, ElemType e);
-bool Delet_Elem_between_j_and_i_ordered(SqList *L, int start, int end);
-bool Delet_Elem_between_j_and_i_Unordered(SqList *L, int start,int end);
-bool Delet_repetitive_Elem(SqList *L);
+bool DeletElem_between_ordered(SqList *L, int start, int end);
+bool DeletElem_between_unorder(SqList *L, int start,int end);
+bool DeletElem_repetitive(SqList *L);
 bool Link_Sqlist(SqList A, SqList B, SqList *C);
-bool Insert_or_change_elem_between_i_and_j(SqList *L, int x);
-bool Insert_or_change_elem_between_i_and_j_pro(SqList *L, int x);
+bool ChangeElem_between(SqList *L, int x);
+bool ChangeElem_between_pro(SqList *L, int x);
 bool test_10(SqList *L, int p);
 bool test_11_basic(SqList *N, SqList *M);  
 int test_12_basic(SqList L);
@@ -280,7 +280,7 @@ bool ChangeList(SqList *L)
 /*
 删除有序顺序表在给定值 i 和 j 之间的元素
 */
-bool Delet_Elem_between_j_and_i_ordered(SqList *L, int start, int end)
+bool DeletElem_between_ordered(SqList *L, int start, int end)
 {
 	int i, j;
 	for(i = 0; L->data[i] < start; i ++);
@@ -300,7 +300,7 @@ bool Delet_Elem_between_j_and_i_ordered(SqList *L, int start, int end)
 /*
 删除顺序表在给定值 i 和 j 之间的元素
 */
-bool Delet_Elem_between_j_and_i_Unordered(SqList *L, int start, int end)
+bool DeletElem_between_unorder(SqList *L, int start, int end)
 {
 	int i = 0, j;
 	if(start > L->length || start > end){
@@ -325,7 +325,7 @@ bool Delet_Elem_between_j_and_i_Unordered(SqList *L, int start, int end)
 /*
 删除有序顺序表中所有重复的元素
 */
-bool Delet_repetitive_Elem(SqList *L)
+bool DeletElem_repetitive(SqList *L)
 {
 	int i = 0, j = 0;
 	while(j < L->length){
@@ -371,7 +371,7 @@ bool Link_Sqlist(SqList A, SqList B, SqList *C)
 在表中查找数值为 x 的元素,若找到则与后继元素交换
 若没找到,则插入表中使得表任然有序
 */
-bool Insert_or_change_elem_between_i_and_j(SqList *L, int x)
+bool ChangeElem_between(SqList *L, int x)
 {
 	int i = 1;
 	while(i <= L->length){
@@ -395,7 +395,7 @@ bool Insert_or_change_elem_between_i_and_j(SqList *L, int x)
 	return TRUE;
 }
 
-bool Insert_or_change_elem_between_i_and_j_pro(SqList *L, int x){
+bool ChangeElem_between_pro(SqList *L, int x){
 	int low = 0, high = L->length - 1, mid;
 	while(low <= high){
 		mid = (low + high) / 2;

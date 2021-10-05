@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "../../../C/Lib/lib_c.h"
+#include "../Lib/lib_c.h"
 
 
 typedef int ElemType;
@@ -17,9 +17,9 @@ typedef struct DNode{
 
 bool InitDLinList(DLinkList *L);
 bool InsertNextDNode(DNode *p, DNode *s);
-bool Creat_List_head(DLinkList *L);
+bool CreatList_head(DLinkList *L);
 void ShowList(DLinkList L);
-bool Creat_List_Tail(DLinkList *L);
+bool CreatList_Tail(DLinkList *L);
 void DestoryList(DLinkList *L);
 bool DeletNextDNode(DNode *p, ElemType *e);
 bool IfEmpty(DLinkList L);
@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
 	InitDLinList(&L);
 
 
-	Creat_List_Tail(&L);
+	CreatList_Tail(&L);
 
 
 	ShowList(L);
@@ -97,7 +97,7 @@ bool InsertPriorDNode(DNode *p, DNode *s)
 }
 
 // 使用头插法建立双链表
-bool Creat_List_head(DLinkList *L)	
+bool CreatList_head(DLinkList *L)	
 {
 	if(*L == NULL){
 		return FALSE;
@@ -118,7 +118,7 @@ bool Creat_List_head(DLinkList *L)
 }
 
 // 尾插法建立双链表
-bool Creat_List_Tail(DLinkList *L)
+bool CreatList_Tail(DLinkList *L)
 {
 	if(*L == NULL){
 		return FALSE;
@@ -154,8 +154,9 @@ void ShowList(DLinkList L)
 // 销毁双链表
 void DestoryList(DLinkList *L)
 {
+	int i = 0;
 	while((*L)->next != NULL){
-		DeletNextDNode(*L);
+		DeletNextDNode(*L, &i);
 	}
 	free(*L);
 	L = NULL;
