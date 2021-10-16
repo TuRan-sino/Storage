@@ -1,11 +1,15 @@
 # 内容
 1. C/C++ source code
 2. Assembly source code  
-3. Datastructure source code
+3. java source code
 4. Matlabe source code
-5. Embedded source code
+5. python source code
+6. bash source code
 
->The temp fold is something what I download from github  
+# 简介
+&emsp;这里面存放的基本上都是我用各种语言写过的代码, 一般情况下都是一些*做题&练习&demo*代码. 不存在Project<br>&emsp;其中每个文件夹下面都有item, item与project不同, item对于我而言一般指的都是一些小的混合程序, 不想Project中的大型项目里面存在文件依赖等其他特性, 都是一些独立的小文件(*也是起着做题&练习的*)<br>
+&emsp;Repo => 代码仓库(非混合代码), 存放的<br>
+&emsp;Lib => 对应语言的个人库<br>
 
 # git 使用说明
 ## git 在不同平台协作使得回车转化

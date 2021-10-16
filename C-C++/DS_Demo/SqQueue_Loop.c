@@ -78,12 +78,12 @@ bool EnQueue(SqQueue *Q, ElemType x)
 	/*
 		(rear + 1) % MAXSIZE 也就是表示rear + 1 对MAXSIZE 取余.
 		MAXSIZE的作用: 因为本例是循环链表, 因此无论如何Q->rear不可以超过MAXSIZE;
-		为什么不是Maxsize - 1? : 因为MAXSIZE是从1开始的(rear & front 是从0开始的), 
-			因此理论上的MAXSIZE(从0开始的话)为Maxsize - 1;
-			因此设置模的时候要将实际上的Maxsize 加上 1, 也就是MAXSIZE - 1 + 1 = MAXSIZE;
-			当rear = MAXSIZE - 1的时候相当于满了, 取余 = Maxsize - 1, 相当于满员;
+		为什么不是maxsize - 1? : 因为MAXSIZE是从1开始的(rear & front 是从0开始的), 
+			因此理论上的MAXSIZE(从0开始的话)为maxsize - 1;
+			因此设置模的时候要将实际上的maxsize 加上 1, 也就是MAXSIZE - 1 + 1 = MAXSIZE;
+			当rear = MAXSIZE - 1的时候相当于满了, 取余 = maxsize - 1, 相当于满员;
 			当rear = MAXSIZE的时候超出一个, 取余 = 0, 相当于从头再次开始;
-		eg: Maxsize = 10 实际的Maxsize(从0开始的话) = 9;
+		eg: maxsize = 10 实际的maxsize(从0开始的话) = 9;
 		假设 	rear = 9 => 取余之后的rear = 9;
 				rear = 10 => 取余之后的rear = 0;
 	*/

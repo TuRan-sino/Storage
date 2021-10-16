@@ -29,6 +29,8 @@ typedef struct HSqStr{
 }HSqStr;
 // 动态分配数组, 使用堆分配的方式存储数据. (使用之后记得要free)
 
+bool GetNext(HSqStr T, int *next);
+int KMP(HSqStr S, HSqStr T);
 int StrLength(HSqStr S);
 bool DestoryStr(HSqStr *S);
 bool StrClean(HSqStr *S);
@@ -39,6 +41,7 @@ bool ShowStr(HSqStr S);
 bool StrAssgin(HSqStr *S, char *str);
 bool StrConcat(HSqStr *T, HSqStr S, HSqStr R);
 int Index_Simple(HSqStr S, HSqStr T);
+int Index(HSqStr S, HSqStr T);
 
 int main(int argc, char const *argv[])
 {
@@ -47,14 +50,17 @@ int main(int argc, char const *argv[])
 	InitStr(&S);
 	InitStr(&T);
 	InitStr(&result);
-	char str0[MAXSIZE] = "12345678 ";
-	char str1[MAXSIZE] = "567"; 
+	char str0[MAXSIZE] = "12312312312344123123";
+	char str1[MAXSIZE] = "1234"; 
 
 	StrAssgin(&S, str0);
 	StrAssgin(&T, str1);
 	
-	int i = Index_Simple(S, T);
+
+	int i = KMP(S, T);
+
 	printf("%d\n", i);
+
 
 
 	DestoryStr(&S);
@@ -198,23 +204,6 @@ int StrCompare(HSqStr S, HSqStr T)
 	return 0;
 }
 
-// 定位子串. 假设主串S中存在与子串T相同的串, 则return主串S中第一次出现的位置. 否则return 0;
-int Index(HSqStr S, HSqStr T)
-{
-	int i = 0;		// 工作变量
-	int m = T.length;
-	HSqStr sub;		// 暂存器, 作为下一步子串的暂存器
-	while(i < S.length - T.length + 1){
-		SubString(&sub, S, i, m);		// 取子串存入暂存器
-		if(StrCompare(sub, T) == 0)		// 判断暂存器与串T是否相同
-			return i;
-		else
-			return i ++;
-	}
-
-	return 0;
-}
-
 // 遍历队列并且输出
 bool ShowStr(HSqStr S)
 {
@@ -228,23 +217,102 @@ bool ShowStr(HSqStr S)
 	return TRUE;
 }
 
+// 定位子串. 假设主串S中存在与子串T相同的串, 则return主串S中第一次出现的位置. 否则return 0;
+int Index(HSqStr S, HSqStr T)
+{
+	int k = 0;		// 工作变量
+	int m = T.length;
+	HSqStr sub;		// 暂存器, 作为下一步子串的暂存器
+	while(k < S.length - T.length + 1){
+		SubString(&sub, S, k, m);		// 取子串存入暂存器
+		if(StrCompare(sub, T) == 0)		// 判断暂存器与串T是否相同
+			return k;
+		else
+			return k ++;
+	}
+
+	return 0;
+}
+
 // 朴素模式匹配算法
 int Index_Simple(HSqStr S, HSqStr T)
 {
-	int i = 0;		// 工作指针: 用来指向当先子串的头
-	int m = i, n = 1;		// m: 用来指向子串的的data[m]; n: 用来指向模式串的data[n]
-	while(m <= S.length && n <= T.length){		// 假设m或者n有任何一个超过了length, 跳出循环
-		if(S.data[m] == T.data[n]){		// 当前二者指向的字符, 相同: 匹配下一个字符; 不同: i++, 重新判断
-			m ++;
-			n ++;
-		}else{
+	int k = 0;		// 工作指针: 用来指向当先子串的头
+	int i = k, j = 1;		// m: 用来指向子串的的data[m]; n: 用来指向模式串的data[n]
+	while(i <= S.length && j <= T.length){		// 假设m或者n有任何一个超过了length, 跳出循环
+		if(S.data[i] == T.data[j]){		// 当前二者指向的字符, 相同: 匹配下一个字符; 不同: i++, 重新判断
 			i ++;
-			m = i;
-			n = 1;
+			j ++;
+		}else{
+			k ++;
+			i = k;
+			j = 1;
 		}
 	}
-	if(n > T.length)		// 防止while循环结束是因为 子串提前结束 而结束的
-		return 	i;
+	if(j > T.length)		// 防止while循环结束是因为 子串提前结束 而结束的
+		return 	k;
 	else
 		return 0;
+}
+
+// -----------------------------------------------------------------------
+
+// 普通的kmp算法
+int KMP(HSqStr S, HSqStr T)
+{
+	int i = 1;
+	int j = 0;
+	int *next;
+	next = (int *)malloc(sizeof(int) * (T.length + 1));
+	GetNext(T, next);
+	while(i <= S.length && j <= T.length){
+		if(j == 0 || T.data[j] == S.data[i]){
+			i ++;
+			j ++;
+		}else{
+			j = next[j];
+		}
+	}
+
+	if(j > T.length){
+		return i - T.length;
+		// return i;
+	}
+
+	return TRUE;
+}
+
+// KMP算法求next数组
+bool GetNext(HSqStr T, int *next)
+{
+	int i = 1, j = 0;
+	next[1] = 0;
+	while(i < T.length){
+		if(j == 0 || T.data[i] == T.data[j]){
+			i ++;
+			j ++;
+			next[i] = j;
+		}else{
+			j = next[j];
+		}
+	}
+
+	return TRUE;
+}
+
+// 优化的kmp算法
+bool KMP_OPT(HSqStr S, HSqStr T)
+{
+	// int i = 1, j = 0;
+	// next[1] = 0;
+	// while
+
+	return TRUE;
+}
+
+// 优化的KMP算法求节nextval数组
+bool GetNextVal(HSqStr T, int *next)
+{
+
+	return TRUE;
 }

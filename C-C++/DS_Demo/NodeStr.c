@@ -106,15 +106,6 @@ bool DestoryStr(LinkList *S)
 	return TRUE;
 }
 
-// 
-bool CreatStr_Tail(LinkList *S)
-{
-
-
-	return TRUE;
-}
-
-
 bool StrAssgin(LinkList *S, char *str)
 {
 	if(!*S)		// 假设S节点不存在, 返回false
@@ -154,14 +145,6 @@ bool IfEmpty(LinkList S)
 		return FALSE;
 }
 
-
-// 
-bool StrClean(LinkList S)
-{
-
-	return TRUE;
-}
-
 // 将两个模式串R & S 链接为一个串T
 bool StrConcat(LinkList *T, LinkList S, LinkList R)
 {
@@ -191,7 +174,7 @@ bool StrConcat(LinkList *T, LinkList S, LinkList R)
 	length = 0;
 	while(length < R->length){
 		t = (StNode *)malloc(sizeof(StNode));
-		t->next = temp->next;
+		t->next = temp->next; 
 		temp->next = t;
 		temp = t;
 		for(i = 0;i < MAXCAPACITY; i ++){

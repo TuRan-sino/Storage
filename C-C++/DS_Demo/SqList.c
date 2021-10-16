@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "../../C/Lib/lib_c.h"
+#include "D:\Work\Storage\C-C++\Lib\lib_c.h"
 
 #define INITSIZE 20
 #define INCREMENT_SIZE 10
@@ -14,7 +14,7 @@
 typedef int ElemType;
 typedef struct{
 	int *data;				
-	int Maxsize;			//最大长度
+	int maxsize;			//最大长度
 	int length;				//已占用长度, 从1开始计数
 }SqList;
 
@@ -76,7 +76,7 @@ bool InitList(SqList *L)
 		return FALSE;
 	}
 	(*L).length = 0;
-	(*L).Maxsize = INITSIZE;
+	(*L).maxsize = INITSIZE;
 
 	return TRUE;
 }
@@ -87,14 +87,14 @@ bool IncreaseSize(SqList *L, int len)
 	int i = 0;
 	int *p = (*L).data;
 	(*L).data = (int *) malloc(sizeof(int) * (INITSIZE + len));	//注意,这里是直接你妈的新创建了一个数据空间!!!
-	for(i = 0; i < ((*L).Maxsize + len); i ++){
+	for(i = 0; i < ((*L).maxsize + len); i ++){
 		(*L).data[i] = 0;
 	}
-	for(i = 0; i < L->Maxsize; i ++){							//这个for函数把原来数据空间的值转移到了新的数据空间
+	for(i = 0; i < L->maxsize; i ++){							//这个for函数把原来数据空间的值转移到了新的数据空间
 		(*L).data[i] = p[i];
 	}
 
-	(*L).Maxsize = (*L).Maxsize + len;
+	(*L).maxsize = (*L).maxsize + len;
 
 	free(p);													//释放原来内存
 
@@ -108,7 +108,7 @@ bool ListInsert(SqList *L, int i, int e)
 {
 	if(i < 1 || i > (*L).length){
 		return FALSE;
-	}else if((*L).length > (*L).Maxsize){
+	}else if((*L).length > (*L).maxsize){
 		return FALSE;
 	}
 
@@ -181,7 +181,7 @@ bool CreatList(SqList *L)
 	int increasenum = 5;
 	int_gets(&num);
 	while(num != -9999){
-		if(L->length + 1 > L->Maxsize){
+		if(L->length + 1 > L->maxsize){
 			IncreaseSize(L, increasenum);
 		}
 		L->data[i] = num;
@@ -198,7 +198,7 @@ bool DestroyList(SqList *L)
 {
 	free(L->data);
 	L->length = 0;
-	L->Maxsize = 0;
+	L->maxsize = 0;
 	return TRUE;
 }
 
@@ -209,13 +209,13 @@ bool InsertElem(SqList *L, int i, ElemType e)			//这里面的 i 实际上表示
 	if (i < 1 || i > L->length + 1){
 		return FALSE;
 	}
-	if (L->length >= L->Maxsize){
-		new = (ElemType*) realloc(L->data, (L->Maxsize + INCREMENT_SIZE) * sizeof(ElemType));
+	if (L->length >= L->maxsize){
+		new = (ElemType*) realloc(L->data, (L->maxsize + INCREMENT_SIZE) * sizeof(ElemType));
 		if (!new){
 			return FALSE;
 		}
 		L->data = new;
-		L->Maxsize += INCREMENT_SIZE;
+		L->maxsize += INCREMENT_SIZE;
 	}
 	ElemType *p = &L->data[i - 1];
 	ElemType *q = &L->data[L->length - 1];
@@ -348,7 +348,7 @@ bool DeletElem_repetitive(SqList *L)
 */
 bool Link_Sqlist(SqList A, SqList B, SqList *C)
 {
-	if(A.length + B.length > C->Maxsize)
+	if(A.length + B.length > C->maxsize)
 		return FALSE;
 	int i = 0, j = 0, k = 0;
 	while(i < A.length && j < B.length){
