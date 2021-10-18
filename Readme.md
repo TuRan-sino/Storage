@@ -26,7 +26,7 @@ dos2unix的一些命令
 ---
 
 autocrlf的工作原理<br>
-0. true
+0. true<br>
    *.   push: ??? -> lf<br>
    *.   pull : ???->crlf<br>
 1. false
