@@ -25,14 +25,13 @@ dos2unix的一些命令
 
 ---
 
-autocrlf的工作原理
-
-0. true<br>
+autocrlf的工作原理<br>
+0. true
    0.   push: ??? -> lf
    1.   pull : ???->crlf
-1. false<br>
+1. false
   0.   push: none
   1.   pull: none
-2. input<br>
+2. input
   0.   push: ??? -> lf
   1.   pull: none
