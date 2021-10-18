@@ -28,10 +28,10 @@ dos2unix的一些命令
 autocrlf的工作原理<br>
 0. true<br>
 &emsp;*.   push: ??? -> lf<br>
-   *.   pull : ???->crlf<br>
+&emsp;*.   pull : ???->crlf<br>
 1. false
-  *.   push: none
-  *.   pull: none
+&emsp;*.   push: none<br>
+&emsp;*.   pull: none<br>
 2. input
-  *.   push: ??? -> lf
-  *.   pull: none
+&emsp;*.   push: ??? -> lf<br>
+&emsp;*.   pull: none<br>
