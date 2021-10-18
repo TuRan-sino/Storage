@@ -29,9 +29,9 @@ autocrlf的工作原理<br>
 0. true<br>
 &emsp;*.   push: ??? -> lf<br>
 &emsp;*.   pull : ???->crlf<br>
-1. false
+1. false<br>
 &emsp;*.   push: none<br>
 &emsp;*.   pull: none<br>
-2. input
+2. input<br>
 &emsp;*.   push: ??? -> lf<br>
 &emsp;*.   pull: none<br>
