@@ -50,7 +50,7 @@ int main(int argc, char const *argv[])
 	InitStr(&S);
 	InitStr(&T);
 	InitStr(&result);
-	char str0[MAXSIZE] = "12312312312344123123";
+	char str0[MAXSIZE] = "12351234";
 	char str1[MAXSIZE] = "1234"; 
 
 	StrAssgin(&S, str0);
@@ -296,16 +296,6 @@ bool GetNext(HSqStr T, int *next)
 			j = next[j];
 		}
 	}
-
-	return TRUE;
-}
-
-// 优化的kmp算法
-bool KMP_OPT(HSqStr S, HSqStr T)
-{
-	// int i = 1, j = 0;
-	// next[1] = 0;
-	// while
 
 	return TRUE;
 }
