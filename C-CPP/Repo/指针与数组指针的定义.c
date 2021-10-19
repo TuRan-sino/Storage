@@ -2,7 +2,7 @@
 
 int main(int argc, char const *argv[])
 {
-	char arr[80] = "adasdfafsvfbgvdxbvxdecrter";
+	char arr[80] = "test";
 	int i = 3;
 	int *p = &i;
 

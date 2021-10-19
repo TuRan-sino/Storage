@@ -29,6 +29,8 @@ typedef struct HSqStr{
 }HSqStr;
 // 动态分配数组, 使用堆分配的方式存储数据. (使用之后记得要free)
 
+bool CreatStr(HSqStr *S);
+bool GetNextVal(HSqStr T, int *next);
 bool GetNext(HSqStr T, int *next);
 int KMP(HSqStr S, HSqStr T);
 int StrLength(HSqStr S);
@@ -38,33 +40,26 @@ bool IfEmpty(HSqStr S);
 bool StrCpoy(HSqStr *T, HSqStr S);
 bool InitStr(HSqStr *S);
 bool ShowStr(HSqStr S);
-bool StrAssgin(HSqStr *S, char *str);
+bool StrAssgin(HSqStr *S, char *temp);
 bool StrConcat(HSqStr *T, HSqStr S, HSqStr R);
 int Index_Simple(HSqStr S, HSqStr T);
 int Index(HSqStr S, HSqStr T);
 
 int main(int argc, char const *argv[])
 {
-	HSqStr S, T;
-	HSqStr result;
+	HSqStr S;
+	int *next;
 	InitStr(&S);
-	InitStr(&T);
-	InitStr(&result);
-	char str0[MAXSIZE] = "12351234";
-	char str1[MAXSIZE] = "1234"; 
 
-	StrAssgin(&S, str0);
-	StrAssgin(&T, str1);
-	
-
-	int i = KMP(S, T);
-
-	printf("%d\n", i);
+	CreatStr(&S);
 
 
+	next = (int*)malloc(sizeof(int) * (S.length + 1));
+	GetNextVal(S, next);
+	for(int i = 1; i < (S.length + 1); i ++){
+		printf("%d", next[i]);
+	}
 
-	DestoryStr(&S);
-	DestoryStr(&S);
 
 	return 0;
 }
@@ -82,16 +77,33 @@ bool InitStr(HSqStr *S)
 }
 
 // 串赋值操作
-bool StrAssgin(HSqStr *S, char *str)
+bool StrAssgin(HSqStr *S, char *temp)
 {
 	int i = 1, j = 0;		// 计数器j目标是: char str, 计数器i目标是: S串
-	while(str[j] != '\0'){		// 从第0未开始, 一直到最后一位(\n)之前	
-		S->data[i] = str[j];
+	while(temp[j] != '\0'){		// 从第0未开始, 一直到最后一位(\n)之前	
+		S->data[i] = temp[j];
 		i ++;
 		j ++;
 		S->length ++;
 	}
 	
+
+	return TRUE;
+}
+
+// 创建str
+bool CreatStr(HSqStr *S)
+{
+	int i = 1, j = 0;
+	char temp[MAXSIZE];
+	printf("Please input your char\n");
+	scanf("%s", temp);
+	while(temp[j] != '\0'){
+		S->data[i] = temp[j];
+		i ++;
+		j ++;
+		S->length ++;
+	}
 
 	return TRUE;
 }
@@ -199,7 +211,6 @@ int StrCompare(HSqStr S, HSqStr T)
 	else 
 		return -1;
 	// 此时S串或者T串有一个已经遍历结束但是还不能得到到底是那个串比较大, 直接比较串长
-
 	// 假设两个串一样长(这个时候的一样长基本上就是相同了)则返回 0
 	return 0;
 }
@@ -207,6 +218,7 @@ int StrCompare(HSqStr S, HSqStr T)
 // 遍历队列并且输出
 bool ShowStr(HSqStr S)
 {
+	printf("Your String is : ");
 	if(S.length < 1)
 		return FALSE;
 	for(int i = 1; i <= S.length; i ++){
@@ -260,23 +272,37 @@ int Index_Simple(HSqStr S, HSqStr T)
 // 普通的kmp算法
 int KMP(HSqStr S, HSqStr T)
 {
-	int i = 1;
-	int j = 0;
+	int i = 1;		// i指向的是主串S
+	int j = 0;		// j指向的是模式串t
+	int count = 0;	// 用来统计while循环的次数
 	int *next;
-	next = (int *)malloc(sizeof(int) * (T.length + 1));
-	GetNext(T, next);
-	while(i <= S.length && j <= T.length){
+	next = (int *)malloc(sizeof(int) * (T.length + 1));		// 给next数组动态分配存储空间
+	GetNextVal(T, next);
+	while(i <= S.length && j <= T.length){		// 循环截止到i 或者 j超出length为止 
 		if(j == 0 || T.data[j] == S.data[i]){
-			i ++;
-			j ++;
+		// j == 0(实际上模式串有数据是从1开始的) 的时候 T.data[0]本质上是没有数据的 '\r'
+			if(count == 0){
+			// 当count == 0 的时候 => j == 0 且 i == 1
+			// 说明主串指向的是第一个数, 模式串指向第0个数(StrAssgin中说明第0数是没有数据的)
+			// 因此这时要让j++, 使得第一次匹配的时候让S.data[i]和T.data[j]可以匹配的上
+				j ++;
+				count ++;
+			}else{
+			// T.data[i] == S.data[j] 因此进行下一步处理, 比较T.data[i + 1] 和 S.data[j + 1]
+				i ++;
+				j ++;
+			}
 		}else{
 			j = next[j];
+			// 匹配失败, 让j返回到next数组指向的位置 
 		}
 	}
 
 	if(j > T.length){
 		return i - T.length;
-		// return i;
+		// i是j > T.length时指向的最后一个位置, 因此 i - T.length 即能够匹配的上的字串的第一个字符位置
+	}else{
+		return 0;
 	}
 
 	return TRUE;
@@ -285,14 +311,17 @@ int KMP(HSqStr S, HSqStr T)
 // KMP算法求next数组
 bool GetNext(HSqStr T, int *next)
 {
-	int i = 1, j = 0;
+	int i = 1, j = 0;		// i初始时指向j后面一个字符
 	next[1] = 0;
 	while(i < T.length){
 		if(j == 0 || T.data[i] == T.data[j]){
+		// j == 0 的时候不用讲, next[1]肯定是 = 0 的, i ++; j ++没有毛病
+		// T.data[i] = T.data[j]这个时候处于Pj和Pk相同的情况(详见笔记)下, 使next[j+1] = next[j] + 1就行 
 			i ++;
 			j ++;
 			next[i] = j;
 		}else{
+		// 这是Pj不同于Pk, 让j左移到next[k]处进行下一轮比较
 			j = next[j];
 		}
 	}
@@ -303,6 +332,23 @@ bool GetNext(HSqStr T, int *next)
 // 优化的KMP算法求节nextval数组
 bool GetNextVal(HSqStr T, int *next)
 {
+	int i = 1, j = 0;
+	next[1] = 0;
+	while(i < T.length){
+		if(j == 0 || T.data[i] == T.data[j]){
+			i ++;
+			j ++;
+			if(T.data[i] != T.data[j])
+				next[i] = j;
+				// 与GetNext相同, 
+			else
+				next[i] = next[j];
+				// 与GetNext不同, 假设i++; j++之后的next数组仍然是相同的, 递归使得next[i] = next[j];
+		}else{
+			j = next[j];
+		}
+	}
+
 
 	return TRUE;
 }

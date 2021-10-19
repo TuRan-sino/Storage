@@ -17,7 +17,7 @@ typedef struct DNode{
 
 bool InitDLinList(DLinkList *L);
 bool InsertNextDNode(DNode *p, DNode *s);
-bool CreatList_head(DLinkList *L);
+bool CreatList_Head(DLinkList *L);
 void ShowList(DLinkList L);
 bool CreatList_Tail(DLinkList *L);
 void DestoryList(DLinkList *L);
@@ -97,7 +97,7 @@ bool InsertPriorDNode(DNode *p, DNode *s)
 }
 
 // 使用头插法建立双链表
-bool CreatList_head(DLinkList *L)	
+bool CreatList_Head(DLinkList *L)	
 {
 	if(*L == NULL){
 		return FALSE;

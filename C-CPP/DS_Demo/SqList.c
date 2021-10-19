@@ -36,10 +36,10 @@ bool DeletElem_repetitive(SqList *L);
 bool Link_Sqlist(SqList A, SqList B, SqList *C);
 bool ChangeElem_between(SqList *L, int x);
 bool ChangeElem_between_pro(SqList *L, int x);
-bool test_10(SqList *L, int p);
-bool test_11_basic(SqList *N, SqList *M);  
-int test_12_basic(SqList L);
-int test_13_basic(SqList L);
+// bool test_10(SqList *L, int p);
+// bool test_11_basic(SqList *N, SqList *M);  
+// int test_12_basic(SqList L);
+// int test_13_basic(SqList L);
 
 int main(int argc, char const *argv[])
 {
@@ -425,33 +425,33 @@ bool ChangeElem_between_pro(SqList *L, int x){
 /*
 左移循环数组 p 位
 */
-bool test_10(SqList *L, int p)
-{
-	int i;
-	int mid_front = (p - 1 + 0) / 2;
-	for(i = 0; i <= mid_front; i ++){
-		int temp;
-		temp = L->data[i];
-		L->data[i] = L->data[p - 1 - i];
-		L->data[p - 1 - i] = temp;
-	}
-	int mid_behind = (L->length - 1 - p) / 2;
-	for(i = 0; i <= mid_behind; i ++){
-		int temp;
-		temp = L->data[p + i];
-		L->data[p + i] = L->data[L->length - 1 - i];
-		L->data[L->length - 1 - i] = temp;
-	}
-	int mid = (L->length - 1) / 2;
-	for(i = 0; i <= mid; i ++){
-		int temp;
-		temp = L->data[i];
-		L->data[i] = L->data[L->length - 1 - i];
-		L->data[L->length - 1 - i] = temp;
-	}
+// bool test_10(SqList *L, int p)
+// {
+// 	int i;
+// 	int mid_front = (p - 1 + 0) / 2;
+// 	for(i = 0; i <= mid_front; i ++){
+// 		int temp;
+// 		temp = L->data[i];
+// 		L->data[i] = L->data[p - 1 - i];
+// 		L->data[p - 1 - i] = temp;
+// 	}
+// 	int mid_behind = (L->length - 1 - p) / 2;
+// 	for(i = 0; i <= mid_behind; i ++){
+// 		int temp;
+// 		temp = L->data[p + i];
+// 		L->data[p + i] = L->data[L->length - 1 - i];
+// 		L->data[L->length - 1 - i] = temp;
+// 	}
+// 	int mid = (L->length - 1) / 2;
+// 	for(i = 0; i <= mid; i ++){
+// 		int temp;
+// 		temp = L->data[i];
+// 		L->data[i] = L->data[L->length - 1 - i];
+// 		L->data[L->length - 1 - i] = temp;
+// 	}
 
-	return TRUE;
-}
+// 	return TRUE;
+// }
 
 
 // /*
@@ -486,77 +486,77 @@ bool test_10(SqList *L, int p)
 /*
 	找到一个线性表里面的主元素,并输出,如果没有主元素那么输出-1
 */
-int test_12_basic(SqList L)
-{
-	int temp = 0;
-	int count = 0;
-	int number = 0;
-	for(int i = 0; i < L.length; i ++){
-		if(L.data[i] > temp){
-			temp = L.data[i];
-		}
-	}
-	int array[temp];
-	for(int i = 0; i < temp; i ++){
-		array[i] = 0;
-	}
-	for(int i = 0; i < L.length; i ++){
-		array[L.data[i]] ++;
-	}
-	for(int i = 0; i < temp; i ++){
-		if(array[i] > count){
-			count = array[i];
-			number = i;
-		}
-	}
+// int test_12_basic(SqList L)
+// {
+// 	int temp = 0;
+// 	int count = 0;
+// 	int number = 0;
+// 	for(int i = 0; i < L.length; i ++){
+// 		if(L.data[i] > temp){
+// 			temp = L.data[i];
+// 		}
+// 	}
+// 	int array[temp];
+// 	for(int i = 0; i < temp; i ++){
+// 		array[i] = 0;
+// 	}
+// 	for(int i = 0; i < L.length; i ++){
+// 		array[L.data[i]] ++;
+// 	}
+// 	for(int i = 0; i < temp; i ++){
+// 		if(array[i] > count){
+// 			count = array[i];
+// 			number = i;
+// 		}
+// 	}
 
 
-	if(count > L.length / 2)
-		return number;
-	else 
-		return -1;
-}
+// 	if(count > L.length / 2)
+// 		return number;
+// 	else 
+// 		return -1;
+// }
 
 
 /*
 	找到一个数组之中未出现的最小整数
 */
-int test_13_basic(SqList L)
-{
-	int number;
-	int temp = 0;
-	for(int i = 0; i < L.length; i ++){
-		if(L.data[i] > temp)
-			temp = L.data[i];
-	}
-	temp += 1;
-	int array[2][temp];					 				//声明二维数组 array 其中第一个参数 0 即是正数, 1 既是负数
-	for(int i = 0; i < temp; i ++){						//初始化 array 数组
-			array[0][i] = 0;
-	}
-	for(int i = 0; i < L.length; i ++){					//遍历 L.data 数组并且使得对应的在 array 上面的映射加一
-		if(L.data[i] > 0){
-			array[0][L.data[i]] ++;
-		}else if(L.data[i] < 0){
-			L.data[i] = - L.data[i];
-			array[1][L.data[i]] ++;
-		}
-	}
-	int i = 0;
-	for(i = 1; i < temp; i ++){							//找出改元素对应的数组下标
-		if(array[0][i] == 0){
-			number = i;
-			break;
-		}
-	}
+// int test_13_basic(SqList L)
+// {
+// 	int number;
+// 	int temp = 0;
+// 	for(int i = 0; i < L.length; i ++){
+// 		if(L.data[i] > temp)
+// 			temp = L.data[i];
+// 	}
+// 	temp += 1;
+// 	int array[2][temp];					 				//声明二维数组 array 其中第一个参数 0 即是正数, 1 既是负数
+// 	for(int i = 0; i < temp; i ++){						//初始化 array 数组
+// 			array[0][i] = 0;
+// 	}
+// 	for(int i = 0; i < L.length; i ++){					//遍历 L.data 数组并且使得对应的在 array 上面的映射加一
+// 		if(L.data[i] > 0){
+// 			array[0][L.data[i]] ++;
+// 		}else if(L.data[i] < 0){
+// 			L.data[i] = - L.data[i];
+// 			array[1][L.data[i]] ++;
+// 		}
+// 	}
+// 	int i = 0;
+// 	for(i = 1; i < temp; i ++){							//找出改元素对应的数组下标
+// 		if(array[0][i] == 0){
+// 			number = i;
+// 			break;
+// 		}
+// 	}
 
-	if(array[0][i - 1] != 0)
-		return i;
-	if(array[0][i - 1] == 0)
-		return number;
+// 	if(array[0][i - 1] != 0)
+// 		return i;
+// 	if(array[0][i - 1] == 0)
+// 		return number;
 
 
-	return -1;
-}
+// 	return -1;
+// }
 
 
