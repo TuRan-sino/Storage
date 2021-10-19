@@ -4,3 +4,4 @@
 *.out
 *.swp
 test.c
+test.cpp
