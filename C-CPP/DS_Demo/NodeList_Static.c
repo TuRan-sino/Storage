@@ -15,9 +15,9 @@
 #define FALSE 0
 #define MAXSIZE 20
 
-typedef int Elemtype;
+typedef int ElemType;
 typedef struct{
-	Elemtype data;		// 数据域
+	ElemType data;		// 数据域
 	int cur;		// 游标, 指向下一个节点
 }Component, StaticLinkList[MAXSIZE];
 
