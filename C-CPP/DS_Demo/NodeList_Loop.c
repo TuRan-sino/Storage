@@ -7,7 +7,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "../../C/Lib/lib_c.h"
+// #include "D :\Work\Storage\C-CPP\Lib\lib_c.h "
+
+#define MAXSIZE 100
+#define TRUE 1
+#define FALSE 0
 
 typedef int ElemType;
 typedef struct RLNode{

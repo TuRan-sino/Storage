@@ -29,6 +29,7 @@ typedef struct HSqStr{
 }HSqStr;
 // 动态分配数组, 使用堆分配的方式存储数据. (使用之后记得要free)
 
+
 bool CreatStr(HSqStr *S);
 bool GetNextVal(HSqStr T, int *next);
 bool GetNext(HSqStr T, int *next);

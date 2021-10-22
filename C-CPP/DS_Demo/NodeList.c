@@ -170,7 +170,7 @@ bool CreatList_Tail(LinkList *L)
 		r = s;		// 所有步骤进行完毕, 使得r指针指向s指针.
 		scanf("%d", &x);
 	}
-	
+	printf("Hello World\n");	
 	
 	return TRUE;
 }

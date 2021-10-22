@@ -13,12 +13,13 @@ typedef struct BiTNode{
 
 int main(int argc, char const *argv[])
 {
-
+	BiTree L;
+	ElemType i;
 	
 	return 0;
 }
 
-bool InitTree(BiTNode &L)
-{
-	
-}
+// bool InitTree(BiTNode &L)
+// {
+
+// }

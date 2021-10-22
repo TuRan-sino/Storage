@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "D:\Work\Storage\C-C++\Lib\lib_c.h"
+#include "D:\Work\Storage\C-CPP\Lib\lib_c.h"
 
 #define INITSIZE 20
 #define INCREMENT_SIZE 10
@@ -59,9 +59,9 @@ int main(int argc, char const *argv[])
 	ShowList(L);
 
 
-	int number = test_13_basic(L);
+	// int number = test_13_basic(L);
 
-	printf("%d\n", number);
+	// printf("%d\n", number);
 
 	printf("%d;\n", L.length);
 
