@@ -262,7 +262,7 @@ int Index_Simple(HSqStr S, HSqStr T)
 			j = 1;
 		}
 	}
-	if(j > T.length)		// 防止while循环结束是因为 子串提前结束 而结束的
+	if(j > T.length)		// 防止while循环结束是因为子串提前结束而结束的
 		return 	k;
 	else
 		return 0;
