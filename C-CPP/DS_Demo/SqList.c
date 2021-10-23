@@ -318,6 +318,7 @@ bool DeletElem_between_unorder(SqList *L, int start, int end)
 		j ++;
 	}
 	L->length = i;
+	
 
 	return TRUE;
 }
