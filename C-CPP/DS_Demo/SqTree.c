@@ -19,7 +19,7 @@ int main(int argc, char const *argv[])
 	return 0;
 }
 
-// bool InitTree(BiTNode &L)
-// {
+bool InitTree(BiTNode &L)
+{
 
-// }
+}
