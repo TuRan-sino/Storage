@@ -21,7 +21,6 @@ typedef struct LNode{
 			换言之就是定义了一个指针L, 指向了链表的头节点
 */
 
-
 bool InitList(LinkList *L);
 bool DestoryList(LinkList L);
 void ShowList(LinkList L);
