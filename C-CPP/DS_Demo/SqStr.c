@@ -273,7 +273,7 @@ int Index_Simple(HSqStr S, HSqStr T)
 // 普通的kmp算法
 int KMP(HSqStr S, HSqStr T)
 {
-	int i = 1;		// i指向的是主串S
+	int i = 1;		// i指向的是主串S 
 	int j = 0;		// j指向的是模式串t
 	int count = 0;	// 用来统计while循环的次数
 	int *next;
