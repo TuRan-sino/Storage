@@ -324,7 +324,7 @@ bool DeletElem_between_unorder(SqList *L, int start, int end)
 }
 
 /*
-删除有序顺序表中所有重复的元素
+删除有序顺序表中所有重复的元素 
 */
 bool DeletElem_repetitive(SqList *L)
 {
