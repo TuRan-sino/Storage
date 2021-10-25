@@ -492,7 +492,7 @@ int test_12_basic(SqList L)
 			temp = L.data[i];
 		}
 	}
-	int array[temp];
+	int *array = (int *)malloc(sizeof(int) * temp); 
 	for(int i = 0; i < temp; i ++){
 		array[i] = 0;
 	}
