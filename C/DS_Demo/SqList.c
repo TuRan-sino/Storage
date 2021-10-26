@@ -11,6 +11,7 @@
 
 
 
+
 typedef int ElemType;
 typedef struct{
 	int *data;				
