@@ -63,7 +63,8 @@ bool InsertNode(BiTree *root)
 		}
 		printf("Please select your choice\n");
 		printf("a. leftchild	b. rightchild	c. exit\n");
-		scanf("%d", &choose);
+		fflush(stdin);
+		scanf("%c", &choose);
 	}
 
 }
@@ -71,8 +72,9 @@ bool InsertNode(BiTree *root)
 BiTNode* InsertLeftNode(BiTNode *t)
 {
 	BiTNode *p;
-	printf("Please enter your number\n");
 	int temp;
+	printf("Please enter your number\n");
+	fflush(stdin);
 	scanf("%d", &temp);
 	p = (BiTree)malloc(sizeof(BiTNode));
 	p->lchild = NULL;
@@ -97,4 +99,4 @@ BiTNode* InsertRightNode(BiTNode *t)
 	t->rchild = p;
 	// 将t（自定义节点）的右指针指向新节点
 
-	}
+}
