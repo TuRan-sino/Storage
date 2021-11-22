@@ -18,10 +18,10 @@ typedef struct TreeNode
 	bool isempty;
 }TreeNode;
 
+bool ShowTree_Pro(TreeNode *t);
+bool ShowTree(TreeNode *t);
 bool CreatTree(TreeNode *t);
 bool InitTree(TreeNode *t);
-bool ShowTree_test(TreeNode *t);
-bool ShowTree(TreeNode *t);
 
 int main(int argc, char const *argv[])
 {
@@ -32,7 +32,7 @@ int main(int argc, char const *argv[])
 	TreeNode t[MAXSIZE];
 	InitTree(t);
 	CreatTree(t);
-	ShowTree_test(t);
+	ShowTree_Pro(t);
 
 	return 0;
 }
@@ -99,6 +99,8 @@ bool CreatTree(TreeNode *t)
 			i = temp;
 		}else if(choice == 'h'){
 			return true;
+		}else{
+			printf("Error Input, Please enter again\n");
 		}
 		fflush(stdin);
 		printf("Please enter your choice\n");
@@ -126,7 +128,7 @@ bool ShowTree(TreeNode *t)
 	return true;
 }
 
-bool ShowTree_test(TreeNode *t)
+bool ShowTree_Pro(TreeNode *t)
 {	
 	if(t[1].isempty == false){
 		printf("0");

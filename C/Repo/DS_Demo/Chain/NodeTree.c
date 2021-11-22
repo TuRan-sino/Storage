@@ -4,7 +4,6 @@ BiTNode: binary Tree Node
 BiTree: binary Tree
 lchild: left child
 rchild: right child
-
 */
 
 #include <stdio.h>
@@ -15,19 +14,20 @@ typedef int ElemType;
 typedef struct BiTNode{
 	ElemType data;
 	struct BiTNode *lchild, *rchild;
-	// struct BiTNode *parent;
+	struct BiTNode *parent;
+	// parent写出来单单只是为了方便自己构建树， 遍历的时候不做使用！
 }BiTNode, *BiTree;
 
 BiTNode* InsertRightNode(BiTNode *t);
 BiTNode* InsertLeftNode(BiTNode *t);
-bool InsertNode(BiTree *root);
+bool CreatTree(BiTree *root);
 bool InitTree(BiTree *root);
 
 int main(int argc, char const *argv[])
 {
 	BiTree root = NULL;
 	InitTree(&root);
-	InsertNode(&root);
+	CreatTree(&root);
 	
 	return 0;
 }
@@ -41,36 +41,65 @@ bool InitTree(BiTree *root)
 	(*root)->lchild = NULL;
 	(*root)->rchild = NULL;
 
+	return true;
 }
 
-bool InsertNode(BiTree *root) 
+bool CreatTree(BiTree *root) 
 {
 	// 定义了一个节点， 
-	BiTNode *t = (*root);
-	printf("Please select your choice\n");
-	printf("a. leftchild	b. rightchild	c. exit\n");
+	BiTNode *position = (*root);
+	int level = 1;
+	printf("Please enter your choice\n");
+	printf("a. InsertLeftChild	b. InsertRightChild\n");
+	printf("c. BackFather		d. ShowPosition\n");
+	printf("e. GotoLeftChild	f. GotoRightChild\n");
+	printf("g. insert		h. exit\n");
 	char choose;
 	scanf("%c", &choose);
-	while(choose != 'c'){
+	while(1){
 		if(choose == 'a'){
-			// 添加一个左节点
-			t = InsertLeftNode(t);
-			(*root)->data ++;
+			// 新建一个左节点
+			position = InsertLeftNode(position);
+			level ++;
 		}else if(choose == 'b'){
-			// 添加一个右节点
-			t = InsertRightNode(t);
-			(*root)->data ++;
+			// 新建一个右节点
+			position = InsertRightNode(position);
+			level ++;
+		}else if(choose == 'c'){	
+			position = position->parent;
+			level --;
+		}else if(choose == 'd'){
+			printf("Your level is %d\n", level);	
+		}else if(choose == 'e'){
+			position = position->lchild;
+			level ++;
+		}else if(choose == 'f'){
+			position = position->rchild;
+			level ++;
+		}else if(choose == 'g'){
+			printf("Please enter your number: \n");
+			int temp = 0;
+			fflush(stdin);
+			scanf("%d", &temp);
+			position->data = temp;
+		}else if(choose == 'h'){
+			return true;
 		}
-		printf("Please select your choice\n");
-		printf("a. leftchild	b. rightchild	c. exit\n");
+		printf("Please enter your choice\n");
+		printf("a. InsertLeftChild	b. InsertRightChild\n");
+		printf("c. BackFather		d. ShowPosition\n");
+		printf("e. GotoLeftChild	f. GotoRightChild\n");
+		printf("g. insert		h. exit\n");
 		fflush(stdin);
 		scanf("%c", &choose);
 	}
 
+	return true;
 }
 
 BiTNode* InsertLeftNode(BiTNode *t)
 {
+	// 生成一个新的节点p, 这个节点作为源节点的左节点
 	BiTNode *p;
 	int temp;
 	printf("Please enter your number\n");
@@ -79,9 +108,11 @@ BiTNode* InsertLeftNode(BiTNode *t)
 	p = (BiTree)malloc(sizeof(BiTNode));
 	p->lchild = NULL;
 	p->rchild = NULL;
+	p->parent = t;
+	// 将目标节点节点的父节点指定为源节点
 	p->data = temp;
 	t->lchild = p; 
-	// 将t（自定义节点）节点的左指针指向新节点
+	// 将源节点节点的左指针指向目标节点
 
 	return p;
 }
@@ -91,12 +122,20 @@ BiTNode* InsertRightNode(BiTNode *t)
 	BiTNode *p;
 	printf("Please enter your number\n");
 	int temp;
+	fflush(stdin);
 	scanf("%d", &temp);
 	p = (BiTree)malloc(sizeof(BiTNode));
 	p->lchild = NULL;
 	p->rchild = NULL;
+	p->parent =t;
 	p->data = temp;
 	t->rchild = p;
-	// 将t（自定义节点）的右指针指向新节点
+	// 将源节点节点的左指针指向目标节点
 
+	return p;
 }
+
+// bool ShowTree_T(BiTree root)
+// {
+	
+// }
