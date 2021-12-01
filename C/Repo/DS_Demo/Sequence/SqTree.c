@@ -156,5 +156,4 @@ bool ShowTree_Pro(TreeNode *t)
 		printf("\n");	
 
 	return true;
-// g1eg2cfg3ceeg4h(with Enter)
 }

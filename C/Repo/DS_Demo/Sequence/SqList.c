@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "D:\Work\Storage\C-CPP\Lib\lib_c.h"
+#include "Lib\lib_c.h"
 
 #define INITSIZE 20
 #define INCREMENT_SIZE 10

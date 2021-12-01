@@ -8,17 +8,12 @@ typedef struct BiTNode{
 	struct BiTNode *lchild, *rchild;
 }BiTNode, *BiTree;
 
-void test()
-{
-	
-}
 
 int main(int argc, char const *argv[])
 {
 	BiTree root = NULL;	
 
 	
-
 	return 0;
 }
 
