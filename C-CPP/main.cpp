@@ -99,7 +99,7 @@ void CreatTree_PostOrder(BiTree *T)
 		(*T) = (BiTNode *)malloc(sizeof(BiTNode));
 		(*T)->data = data;
 	}
-
+	
 }
 
 // 二叉树的先序遍历
