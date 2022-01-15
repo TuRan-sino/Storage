@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "D:\Project\C\lib\lib_c.h"
+#include "D:\Work\Storage\C-CPP\Lib\lib_c.h"
 
 #define MAXTITL 40
 #define MAXAUTL 40
