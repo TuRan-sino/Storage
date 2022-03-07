@@ -1,2 +1,3 @@
-var="helloworld"
+var="Hello World"
+
 echo ${var}

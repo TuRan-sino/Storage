@@ -30,9 +30,6 @@
 0 <= s.length <= 5 * 104
 s 由英文字母、数字、符号和空格组成
 
-来源：力扣（LeetCode）
-链接：https://leetcode-cn.com/problems/longest-substring-without-repeating-characters
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -47,6 +44,7 @@ int main(int argc, char const *argv[])
 	return 0;
 }
 
-int lengthOfLongestSubstring(char * s){
-
+int lengthOfLongestSubstring(char * s)
+{
+	
 }

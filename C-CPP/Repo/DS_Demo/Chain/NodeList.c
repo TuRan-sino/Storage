@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-// #include "D:\Project\C\Lib\lib_c.h"
 
 #define FALSE 0
 #define TRUE 1
