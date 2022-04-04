@@ -44,7 +44,6 @@ int main(int argc, char const *argv[])
 
 
 
-
 // 初始化双链表
 bool InitDLinList(DLinkList *L)
 {
