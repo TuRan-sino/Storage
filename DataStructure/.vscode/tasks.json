@@ -1,72 +1,94 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "type": "cppbuild",
-            "label": "C/C++: gcc.exe 生成活动文件",
-            "command": "C:/MinGw/bin/gcc.exe",
-            "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
-            ],
-            "options": {
-                "cwd": "C:/MinGw/bin"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": "test",
-            "detail": "编译器: C:/MinGw/bin/gcc.exe",
-        },
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: gcc.exe 生成活动文件",
+			"command": "C:/MinGw/bin/gcc.exe",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}\\${fileBasenameNoExtension}.exe"
+			],
+			"options": {
+				"cwd": "C:/MinGw/bin"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "none",
+				"isDefault": false
+			},
+			"detail": "编译器: C:/MinGw/bin/gcc.exe"
+		},
+		{
+			"type": "shell",
+			"label": "Compile C Code",
+			"command": "gcc",
+			"args": [
+				"${file}",
+				"-o",
+				"${fileDirname}\\a.exe"
+			],
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group":{
+				"kind": "none",
+				"isDefault": false,
+			},
+			"presentation": {
+				"echo": true,
+				"reveal": "silent",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": false,
+				"clear": false
+			}
+		},
 
-        {
-            "type": "shell",
-            "label": "Run Code",
-            "command": "C:/MinGw/bin/gcc.exe",
-            "args": [
-                "${file}",
-                "-o",
-                "${fileDirname}\\a.exe"
-            ],
-            "options": {
-                "cwd": "C:/MinGw/bin"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": "build",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": true,
-                "panel": "shared",
-                "showReuseMessage": true,
-                "clear": true
-            }
-        },
-        
-        {
-            "type": "shell",
-            "label": "Delet all exe",
-            "command": "rm",
-            "args": [
-                "*.exe"
-            ],
-            "options": {
-                "cwd": "${fileDirname}"
-            },
-            "group": "test",
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": true,
-                "panel": "shared",
-                "showReuseMessage": true,
-                "clear": false
-            }
-        }
-    ],
+		{
+			"type": "shell",
+			"label": "Run C exe",
+			"command": "cd ${fileDirname}; ./a.exe",
+			"dependsOn": ["Compile C Code"],
+			"dependsOrder": "sequence",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": true
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+
+		{
+			"type": "shell",
+			"label": "Clean exe",
+			"command": "rm",
+			"args": [
+				"${fileDirname}\\*.exe"
+			],
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": true
+			},
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			}	
+		}
+	]
 }

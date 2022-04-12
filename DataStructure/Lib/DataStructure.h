@@ -1,5 +1,5 @@
-#ifndef __TURAN_H__
-#define __TURAN_H__
+#ifndef __DATASTRUCTURE_H__
+#define __DATASTRUCTURE_H__
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>

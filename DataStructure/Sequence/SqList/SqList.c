@@ -9,12 +9,13 @@
 int main()
 {
 	SqList L;
-	Init_List(&L);
+	List_Init(&L);
 
-	Creat_List(&L);
-	
-	Show_List(L);
-	printf("%d", L.maxsize);
+	List_Creat(&L);
+
+	List_Insert(&L, 3, 2);
+
+	List_Show(L);
 
 
 
@@ -27,7 +28,7 @@ int main()
  * @param	L [SqList *] 线性表的地址
  * @param	len [int] 线性表的长度
 */
-bool Init_List(SqList *L)
+bool List_Init(SqList *L)
 {
 	(*L).data = (ElemType *)malloc(sizeof(ElemType) * INITSIZE);		// 给data malloc数据空间
 
@@ -44,14 +45,14 @@ bool Init_List(SqList *L)
  * @brief	创建线性表
  * @param	L [SqList *] 线性表的头指针
 */
-bool Creat_List(SqList *L)
+bool List_Creat(SqList *L)
 {
 	int i = 0, num = 0;
 
 	scanf("%d", &num);
 	while(num != -9999){
 		if(L->length + 1 > L->maxsize){		// 假设当前线性表的长度大于最大长度, 则扩大线性表
-			Creat_List(L);
+			List_Creat(L);
 		}
 		L->data[i] = num;
 		i ++;
@@ -68,7 +69,7 @@ bool Creat_List(SqList *L)
  * @param	L [SqList *]
  * @retval	void
 */
-void Show_List(SqList L)
+void List_Show(SqList L)
 {
 	int i;
 	for(i = 0; i < L.length; i ++){
@@ -86,7 +87,7 @@ void Show_List(SqList L)
  * 			之后将原来的数据域的地址设置为新的数据域
  * 			并且将原来的数据域free了
 */
-bool Increase_List(SqList *L)
+bool List_Increase(SqList *L)
 {
 	ElemType *data;
 	data = (ElemType *)malloc(sizeof(ElemType) * L->maxsize + INCSIZE);		// 新建一个数据域
@@ -103,4 +104,24 @@ bool Increase_List(SqList *L)
 
 
 	return TRUE;
+}
+
+
+/**
+ * @brief	在线性表中某一个位置后面插入某一个元素
+ * @param	location [int] 插入的位置, Location 从 1 开始计数
+ * @param	data [ElemType] 所需要插入的数据
+ * @retval	bool
+*/
+bool List_Insert(SqList *L, int location, ElemType data)
+{
+	for(int i = L->length; i >= location; i --){
+		L->data[i] = L->data[i - 1];
+	}
+
+	L->data[location] = data;
+	
+	L->length ++;
+
+	return TRUE;	
 }
