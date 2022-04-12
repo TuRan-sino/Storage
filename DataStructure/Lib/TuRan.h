@@ -8,8 +8,10 @@
 #define TRUE 1
 #define FALSE 0
 #define INITSIZE 20
+#define INCSIZE 10
 
 typedef int ElemType;
+// 线性表结构体
 typedef struct sqlist{
 	int *data;			// 数据域
 	int maxsize;		// 最大长度

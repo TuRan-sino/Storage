@@ -1,0 +1,19 @@
+{
+	"C_Cpp.errorSquiggles": "Enabled",
+	"files.exclude": {
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/.DS_Store": true,
+		"**/Thumbs.db": true,
+		"**/*.out": true,
+		"**/*.exe": true
+	},
+	"files.associations": {
+		"*.asm": "assembly",
+		"vimrc": "vimrc",
+		"stdbool.h": "c",
+		"lib_c.h": "c"
+	}
+}

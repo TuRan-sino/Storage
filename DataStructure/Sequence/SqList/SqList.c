@@ -12,11 +12,15 @@
 int main()
 {
 	SqList L;
-	Init_List(&L, INITSIZE);
+	Init_List(&L);
 
 	Creat_List(&L);
+	
+	Increase_List(&L);
 
-	Show_List(&L);
+	Show_List(L);
+
+	printf("%d\n", L.maxsize);
 
 
 	return TRUE;
@@ -28,9 +32,9 @@ int main()
  * @param	L [SqList *] 线性表的地址
  * @param	len [int] 线性表的长度
 */
-bool Init_List(SqList *L, int len)
+bool Init_List(SqList *L)
 {
-	(*L).data = (int *)malloc(sizeof(int) * INITSIZE);		// 给data malloc数据空间
+	(*L).data = (ElemType *)malloc(sizeof(ElemType) * INITSIZE);		// 给data malloc数据空间
 
 	if(!L->data) return FALSE;								// 假设L->data不存在, 返回FALSE
 
@@ -69,11 +73,11 @@ bool Creat_List(SqList *L)
  * @param	L [SqList *]
  * @retval	void
 */
-void Show_List(SqList *L)
+void Show_List(SqList L)
 {
 	int i;
-	for(i = 0; i < L->length; i ++){
-		printf("%d ", L->data[i]);
+	for(i = 0; i < L.length; i ++){
+		printf("%d ", L.data[i]);
 	}
 
 	putchar('\n');
@@ -83,8 +87,29 @@ void Show_List(SqList *L)
 /**
  * @brief	延长链表
  * @param	L [SqList *]
+ * @note 	重新创建一个线性表, 该线性表的长度为原来线性表的长度 + INCSIZE
+ * 			之后将原来的线性表的地址设置为新的线性表
+ * 			并且将原来的线性表free了
 */
-void Inc_List(SqList *L)
+bool Increase_List(SqList *L)
 {
-	
+	SqList M;
+	M.data = (ElemType *)malloc(sizeof(ElemType) * L->maxsize + INCSIZE);
+	M.length = 0;
+	M.maxsize = L->maxsize + INCSIZE;
+	if(!M.data) return FALSE;
+
+	for(int i = 0; i < L->length; i ++){
+		M.data[i] = L->data[i];
+		M.length ++;
+	}
+
+	free(L->data);
+
+	L->data = M.data;
+	L->length = M.length;
+	L->maxsize = M.maxsize;
+
+
+	return TRUE;
 }
