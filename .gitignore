@@ -1,7 +1,2 @@
 *.exe
 *.out
-*.swp
-*.obj
-
-test.c
-test.cpp

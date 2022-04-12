@@ -4,9 +4,6 @@
 @des: 	线性表相关代码
 ****************************************************************************************************/
 #include "SqList.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
 
 
 int main()
@@ -16,11 +13,9 @@ int main()
 
 	Creat_List(&L);
 	
-	Increase_List(&L);
-
 	Show_List(L);
+	printf("%d", L.maxsize);
 
-	printf("%d\n", L.maxsize);
 
 
 	return TRUE;
@@ -36,10 +31,10 @@ bool Init_List(SqList *L)
 {
 	(*L).data = (ElemType *)malloc(sizeof(ElemType) * INITSIZE);		// 给data malloc数据空间
 
-	if(!L->data) return FALSE;								// 假设L->data不存在, 返回FALSE
+	if(!L->data) return FALSE;											// 假设L->data不存在, 返回FALSE
 
-	(*L).length = 0;										// 将初始时的length设置为0
-	(*L).maxsize = INITSIZE;								// 将初始时的 maxsize 设置为 INITSIZE
+	(*L).length = 0;													// 将初始时的length设置为0
+	(*L).maxsize = INITSIZE;											// 将初始时的 maxsize 设置为 INITSIZE
 
 	return TRUE;
 }
@@ -55,13 +50,13 @@ bool Creat_List(SqList *L)
 
 	scanf("%d", &num);
 	while(num != -9999){
-		// if(L->length + 1 > L->maxsize){
-			
-		// }
+		if(L->length + 1 > L->maxsize){		// 假设当前线性表的长度大于最大长度, 则扩大线性表
+			Creat_List(L);
+		}
 		L->data[i] = num;
 		i ++;
 		L->length ++;
-		scanf("%d", &num);
+		scanf("%d", &num);					// 挨个输入数据
 	}
 	return TRUE;
 }
@@ -87,28 +82,24 @@ void Show_List(SqList L)
 /**
  * @brief	延长链表
  * @param	L [SqList *]
- * @note 	重新创建一个线性表, 该线性表的长度为原来线性表的长度 + INCSIZE
- * 			之后将原来的线性表的地址设置为新的线性表
- * 			并且将原来的线性表free了
+ * @note 	重新创建一个数据域, 该数据域的长度为原来数据域的最大长度 + INCSIZE
+ * 			之后将原来的数据域的地址设置为新的数据域
+ * 			并且将原来的数据域free了
 */
 bool Increase_List(SqList *L)
 {
-	SqList M;
-	M.data = (ElemType *)malloc(sizeof(ElemType) * L->maxsize + INCSIZE);
-	M.length = 0;
-	M.maxsize = L->maxsize + INCSIZE;
-	if(!M.data) return FALSE;
+	ElemType *data;
+	data = (ElemType *)malloc(sizeof(ElemType) * L->maxsize + INCSIZE);		// 新建一个数据域
+	if(!data) return FALSE;													// 假设数据域创建失败, 返回false
 
-	for(int i = 0; i < L->length; i ++){
-		M.data[i] = L->data[i];
-		M.length ++;
-	}
+	for(int i = 0; i < L->length; i ++) data[i] = L->data[i];				// 挨个将数据传到新的数据域中
 
-	free(L->data);
 
-	L->data = M.data;
-	L->length = M.length;
-	L->maxsize = M.maxsize;
+	free(L->data);															// 释放原先的链表的数据域
+
+	// 将原先的链表的指针域以及各个域全部都设置为新的
+	L->data = data;
+	L->maxsize = L->maxsize + INCSIZE;
 
 
 	return TRUE;
