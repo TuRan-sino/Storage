@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "D:\Work\Storage\C-CPP\Lib\lib_c.h"
+#include "../../C-CPP/Lib/lib_c.h"
 
 #define INITSIZE 20
 #define INCREMENT_SIZE 10
@@ -13,7 +13,7 @@
 
 
 typedef int ElemType;
-typedef struct{
+typedef struct SqList{
 	int *data;				
 	int maxsize;			//最大长度
 	int length;				//已占用长度, 从1开始计数
@@ -516,41 +516,41 @@ int test_12_basic(SqList L)
 
 
 
-// 找到一个数组之中未出现的最小整数
-int test_13_basic(SqList L)
-{
-	int number;
-	int temp = 0;
-	for(int i = 0; i < L.length; i ++){
-		if(L.data[i] > temp)
-			temp = L.data[i];
-	}
-	temp += 1;
-	int array[2][temp];					 				//声明二维数组 array 其中第一个参数 0 即是正数, 1 既是负数
-	for(int i = 0; i < temp; i ++){						//初始化 array 数组
-			array[0][i] = 0;
-	}
-	for(int i = 0; i < L.length; i ++){					//遍历 L.data 数组并且使得对应的在 array 上面的映射加一
-		if(L.data[i] > 0){
-			array[0][L.data[i]] ++;
-		}else if(L.data[i] < 0){
-			L.data[i] = - L.data[i];
-			array[1][L.data[i]] ++;
-		}
-	}
-	int i = 0;
-	for(i = 1; i < temp; i ++){							//找出改元素对应的数组下标
-		if(array[0][i] == 0){
-			number = i;
-			break;
-		}
-	}
+// // 找到一个数组之中未出现的最小整数
+// int test_13_basic(SqList L)
+// {
+// 	int number;
+// 	int temp = 0;
+// 	for(int i = 0; i < L.length; i ++){
+// 		if(L.data[i] > temp)
+// 			temp = L.data[i];
+// 	}
+// 	temp += 1;
+// 	int array[2][temp];					 				//声明二维数组 array 其中第一个参数 0 即是正数, 1 既是负数
+// 	for(int i = 0; i < temp; i ++){						//初始化 array 数组
+// 			array[0][i] = 0;
+// 	}
+// 	for(int i = 0; i < L.length; i ++){					//遍历 L.data 数组并且使得对应的在 array 上面的映射加一
+// 		if(L.data[i] > 0){
+// 			array[0][L.data[i]] ++;
+// 		}else if(L.data[i] < 0){
+// 			L.data[i] = - L.data[i];
+// 			array[1][L.data[i]] ++;
+// 		}
+// 	}
+// 	int i = 0;
+// 	for(i = 1; i < temp; i ++){							//找出改元素对应的数组下标
+// 		if(array[0][i] == 0){
+// 			number = i;
+// 			break;
+// 		}
+// 	}
 
-	if(array[0][i - 1] != 0)
-		return i;
-	if(array[0][i - 1] == 0)
-		return number;
+// 	if(array[0][i - 1] != 0)
+// 		return i;
+// 	if(array[0][i - 1] == 0)
+// 		return number;
 
 
-	return -1;
-}
+// 	return -1;
+// }
