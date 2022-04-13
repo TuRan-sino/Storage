@@ -1,7 +1,7 @@
 /****************************************************************************************************
-@author:	TuRan
-@data:	2022/4/10
-@des: 	线性表相关代码
+@author: TuRan
+@data: 2022/4/10
+@des: 线性表相关代码
 ****************************************************************************************************/
 #include "SqList.h"
 
@@ -9,15 +9,24 @@
 int main()
 {
 	SqList L;
+	ElemType data;
+
 	List_Init(&L);
 
 	List_Creat(&L);
-
-	List_Insert(&L, 3, 2);
-
 	List_Show(L);
+	List_InsertElem(&L, 3, 2);
+	List_Show(L);
+	List_DeletELem(&L, 5, &data);
+	List_Show(L);
+	List_ChangeElem(&L, 3, 2);
+	List_Show(L);
+	List_FindElem(&L, 3, &data);
+	List_Show(L);
+	printf("%d\n", data);
+	
 
-
+	List_Destory(&L);
 
 	return TRUE;
 }
@@ -28,7 +37,7 @@ int main()
  * @param	L [SqList *] 线性表的地址
  * @param	len [int] 线性表的长度
 */
-bool List_Init(SqList *L)
+int List_Init(SqList *L)
 {
 	(*L).data = (ElemType *)malloc(sizeof(ElemType) * INITSIZE);		// 给data malloc数据空间
 
@@ -36,6 +45,8 @@ bool List_Init(SqList *L)
 
 	(*L).length = 0;													// 将初始时的length设置为0
 	(*L).maxsize = INITSIZE;											// 将初始时的 maxsize 设置为 INITSIZE
+
+	printf("Init Success\n");
 
 	return TRUE;
 }
@@ -45,7 +56,7 @@ bool List_Init(SqList *L)
  * @brief	创建线性表
  * @param	L [SqList *] 线性表的头指针
 */
-bool List_Creat(SqList *L)
+int List_Creat(SqList *L)
 {
 	int i = 0, num = 0;
 
@@ -66,7 +77,7 @@ bool List_Creat(SqList *L)
 
 /**
  * @brief	遍历链表
- * @param	L [SqList *]
+ * @param	L [SqList *] 线性表的指针
  * @retval	void
 */
 void List_Show(SqList L)
@@ -82,12 +93,12 @@ void List_Show(SqList L)
 
 /**
  * @brief	延长链表
- * @param	L [SqList *]
+ * @param	L [SqList *] 线性表的指针
  * @note 	重新创建一个数据域, 该数据域的长度为原来数据域的最大长度 + INCSIZE
  * 			之后将原来的数据域的地址设置为新的数据域
  * 			并且将原来的数据域free了
 */
-bool List_Increase(SqList *L)
+int List_Increase(SqList *L)
 {
 	ElemType *data;
 	data = (ElemType *)malloc(sizeof(ElemType) * L->maxsize + INCSIZE);		// 新建一个数据域
@@ -108,20 +119,100 @@ bool List_Increase(SqList *L)
 
 
 /**
- * @brief	在线性表中某一个位置后面插入某一个元素
+ * @brief	(增)在线性表中某一个位置后面插入某一个元素
+ * @param	L [SqList *] 线性表的指针
  * @param	location [int] 插入的位置, Location 从 1 开始计数
  * @param	data [ElemType] 所需要插入的数据
- * @retval	bool
+ * @note	location是从1开始计数的, 因此location作为插入位置比实际上的插入位置location' 多了一个位
+ * @retval	int
 */
-bool List_Insert(SqList *L, int location, ElemType data)
+int List_InsertElem(SqList *L, int location, ElemType data)
 {
-	for(int i = L->length; i >= location; i --){
+	if(L->length + 1 > L->maxsize){
+		List_Increase(L);
+	}
+
+	for(int i = L->length; i >= location; i --){		// 将 L->length 一直到 location(location' + 1)全部都向后移一位
 		L->data[i] = L->data[i - 1];
 	}
 
-	L->data[location] = data;
+	L->data[location] = data;							// 将data插入在 location' + 1 的位置上
 	
-	L->length ++;
+	L->length ++;										// L->length 加一
 
 	return TRUE;	
+}
+
+
+/**
+ * @brief	(删)在线性表某一位位置上删除一个元素, 并且返回元素内
+ * @param	L [SqList *] 线性表的指针
+ * @param	location [int] 需要删除的位置
+ * @param	data [ElemType *] 删除的元素的内容
+ * @retval	int
+*/
+int List_DeletELem(SqList *L, int location, ElemType *data)
+{
+	if(location > L->length || L->length == 0) return FALSE;		// 假设location 比 L的长度大, 或者L的长度本身就位0,  返回false
+
+	*data  = L->data[location - 1];									// 将data传过去
+
+	for(int i = location - 1; i < L->length; i ++){					// 从location' 处开始, 所有数据一次向左移一位
+		L->data[i] = L->data[i + 1];
+	}
+
+	L->length --;
+
+	return true;
+}
+
+
+/**
+ * @brief	(改)修改某一个位置上面的元素
+ * @param	L [SqList *] 线性表的指针
+ * @param	location [int] 需要修改的元素所在的位置
+ * @param	data [ElemType] 需要修改的元素的内容
+ * @retval	int
+*/
+int List_ChangeElem(SqList *L, int location, ElemType data)
+{
+	if(location > L->length) return FALSE;
+
+	L->data[location - 1] = data;
+
+	return true;
+}
+
+
+/**
+ * @brief	(查)查找某一个位置上面的元素并且返回
+ * @param	L [SqList *] 线性表的指针
+ * @param	location [int] 元素的位置
+ * @param	data [ElemType *] 返回的元素
+ * @retval	int
+*/
+int List_FindElem(SqList *L, int location, ElemType *data)
+{
+	if(location > L->length) return FALSE;
+
+	*data = L->data[location - 1];
+
+	return TRUE;
+}
+
+
+/**
+ * @brief	销毁线性表
+ * @param	L [SqList *]
+ * @retval	int
+*/
+int List_Destory(SqList *L)
+{
+	free(L->data);
+	L->length = 0;
+	L->maxsize = 0;
+
+	printf("Destory Success\n");
+
+	return true;
 }
