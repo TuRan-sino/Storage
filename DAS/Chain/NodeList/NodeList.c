@@ -1,7 +1,7 @@
 /****************************************************************************************************
 @author: TuRan
-@data: 2022/4/14
-@des: 
+@data: 	2022/4/14
+@des: 链表相关代码
 ****************************************************************************************************/
 #include <stdio.h>
 #include "NodeList.h"
@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
 	LinkList L;
 
 	LNode_Init(&L);
+	LNode_Creat_Tail(&L);
 	LNode_Creat_Head(&L);
 
 	LNode_Show(L);
@@ -40,6 +41,32 @@ bool LNode_Init(LinkList *L)
 
 
 /**
+ * @brief	尾插法创建链表
+ * @param	L [LinkList *]
+ * @retval	bool
+*/
+bool LNode_Creat_Tail(LinkList *L)
+{
+	LNode *r = (*L);		// 建立一个指针r, 始终指向最后一个节点
+	ElemType x = 0;
+	scanf("%d", &x);
+
+	while(x != -9999){
+		LNode *s = malloc(sizeof(LNode));	// 新建一个节点, 用于随后的插入
+		s->next = r->next;					// 将新节点的指针指向最后一个指针的next域
+		s->data = x;						// 新节点指针data域赋值
+		if(s == NULL) return FALSE;			// 假设新节点创建失败, 返回false
+		r->next = s;						// 将最后一个指针的next域指向新节点
+		r = s;								// 一切完成, r指向新节点, 也就是当前的最后一个指针
+		(*L)->length ++;
+		scanf("%d", &x);
+	}
+	
+	return TRUE;
+}
+
+
+/**
  * @brief	头插法创建单链表
  * @param	L [LinkList *]
  * @note	每次在头结点的后面创建节点, 这里完全不需要使用LinkList *类型, 但是为了统一起见, 这里也使用 LinkList * 类型
@@ -54,12 +81,12 @@ bool LNode_Creat_Head(LinkList *L)
 	scanf("%d", &TempData);
 
 	while(TempData != -9999){
-		s = malloc(sizeof(LNode));
-		s->data = TempData;
-		s->next = (*L)->next;
-		(*L)->next = s;
+		s = malloc(sizeof(LNode));		// 新建一个节点, 用于随后的插入
+		s->data = TempData;				// 新节点data域赋值
+		s->next = (*L)->next;			// 将新节点的next域指向头节点后面的那一个节点
+		(*L)->next = s;					// 头节点的next域指向新节点
 		scanf("%d", &TempData);
-		(*L)->length ++;
+		(*L)->length ++;				// 链表长度加一
 	}
 
 	return TRUE;

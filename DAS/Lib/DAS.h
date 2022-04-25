@@ -16,7 +16,7 @@ typedef int ElemType;
 
 // 线性表结构体
 typedef struct SqList{
-	ElemType *data;			// 数据域
+	ElemType *data;		// 数据域
 	int maxsize;		// 最大长度
 	int length;			// 已占用长度
 }SqList;
