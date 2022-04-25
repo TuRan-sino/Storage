@@ -1,10 +1,10 @@
 /****************************************************************************************************
 @author: TuRan
 @data: 	2022/4/14
-@des: 链表相关代码
+@des: 	链表相关代码
+		Linked list code
 ****************************************************************************************************/
-#include <stdio.h>
-#include "NodeList.h"
+#include "LinkList.h"
 
 
 int main(int argc, char *argv[])
@@ -32,7 +32,6 @@ bool LNode_Init(LinkList *L)
 	if(!*L) return FALSE;
 
 	(*L)->next = NULL;						// 初始时将L的next节点设置位null, 防止出现问题
-	(*L)->length = 0;
 
 	printf("Initial Success\n");
 
@@ -58,7 +57,6 @@ bool LNode_Creat_Tail(LinkList *L)
 		if(s == NULL) return FALSE;			// 假设新节点创建失败, 返回false
 		r->next = s;						// 将最后一个指针的next域指向新节点
 		r = s;								// 一切完成, r指向新节点, 也就是当前的最后一个指针
-		(*L)->length ++;
 		scanf("%d", &x);
 	}
 	
@@ -86,7 +84,6 @@ bool LNode_Creat_Head(LinkList *L)
 		s->next = (*L)->next;			// 将新节点的next域指向头节点后面的那一个节点
 		(*L)->next = s;					// 头节点的next域指向新节点
 		scanf("%d", &TempData);
-		(*L)->length ++;				// 链表长度加一
 	}
 
 	return TRUE;
