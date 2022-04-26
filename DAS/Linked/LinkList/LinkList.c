@@ -3,17 +3,21 @@
 @data: 	2022/4/14
 @des: 	链表相关代码
 		Linked list code
-****************************************************************************************************/
+*****************************************************************************************************/
 #include "LinkList.h"
 
 
 int main(int argc, char *argv[])
 {
 	LinkList L;
+	ElemType num;
 
 	LNode_Init(&L);
 	LNode_Creat_Tail(&L);
-	LNode_Creat_Head(&L);
+
+	LNode_DeletElem(&L, 3, &num);
+
+	printf("%d\n", num);
 
 	LNode_Show(L);
 }
@@ -46,8 +50,10 @@ bool LNode_Init(LinkList *L)
 */
 bool LNode_Creat_Tail(LinkList *L)
 {
+	if(*L == NULL) return FALSE;
 	LNode *r = (*L);		// 建立一个指针r, 始终指向最后一个节点
 	ElemType x = 0;
+	printf("Start input\n");
 	scanf("%d", &x);
 
 	while(x != -9999){
@@ -57,6 +63,7 @@ bool LNode_Creat_Tail(LinkList *L)
 		if(s == NULL) return FALSE;			// 假设新节点创建失败, 返回false
 		r->next = s;						// 将最后一个指针的next域指向新节点
 		r = s;								// 一切完成, r指向新节点, 也就是当前的最后一个指针
+		(*L)->data ++;
 		scanf("%d", &x);
 	}
 	
@@ -73,17 +80,20 @@ bool LNode_Creat_Tail(LinkList *L)
 */
 bool LNode_Creat_Head(LinkList *L)
 {
-	ElemType TempData;
+	if(*L == NULL) return FALSE;
+	ElemType x;
 	LNode *s = NULL;
+	printf("Start input\n");
 
-	scanf("%d", &TempData);
+	scanf("%d", &x);
 
-	while(TempData != -9999){
+	while(x != -9999){
 		s = malloc(sizeof(LNode));		// 新建一个节点, 用于随后的插入
-		s->data = TempData;				// 新节点data域赋值
+		s->data = x;				// 新节点data域赋值
 		s->next = (*L)->next;			// 将新节点的next域指向头节点后面的那一个节点
 		(*L)->next = s;					// 头节点的next域指向新节点
-		scanf("%d", &TempData);
+		(*L)->data ++;
+		scanf("%d", &x);
 	}
 
 	return TRUE;
@@ -97,6 +107,7 @@ bool LNode_Creat_Head(LinkList *L)
 */
 void LNode_Show(LinkList L)
 {
+	printf("Your LinkList is: ");
 	LNode *temp;
 	temp = L->next;
 
@@ -105,5 +116,97 @@ void LNode_Show(LinkList L)
 		temp = temp->next;
 	}
 	putchar('\n');
-	printf("show over\n");
+	printf("Show over\n");
+}
+
+
+/**
+ * @brief	(增) 在单链表的某一个位置后面插入一个节点
+ * @param	L [LinkList *]
+ * @param	location [int] 该节点插入的位置
+ * @param	num [ElemType] 该节点data域的数据
+ * @retval	bool
+*/
+bool LNode_Insert_Elem(LinkList *L, int locatoin, ElemType num)
+{
+	LNode *s = malloc(sizeof(LNode));
+	LNode *p = (*L)->next;
+	s->data = num;
+
+	for(int i = 0; i < locatoin - 1; i ++){
+		if(p == NULL) return FALSE;
+		p = p->next;
+	}
+
+	s->next = p->next;
+	p->next = s;
+
+	return TRUE;
+}
+
+
+/**
+ * @brief	(删) 删除单链表在某一个位置傻瓜的节点
+ * @param	L [LinkList *] 操作的单链表
+ * @param	location [int] 删除节点的位置
+ * @param	num [ElemType *]	删除的节点的data域
+ * @retval	bool
+*/
+bool LNode_DeletElem(LinkList *L, int location, ElemType *num)
+{
+	LNode *p = (*L)->next;
+	LNode *temp;
+	for(int i = 0; i < location - 2; i ++){
+		if(p->next == NULL) return FALSE;
+		p = p->next;
+	}
+	temp = p->next;
+	if(temp == NULL) return FALSE;
+	*num = temp->data;
+	p->next = p->next->next;
+
+	free(temp);
+
+	return TRUE;
+}
+
+
+/**
+ * @brief	(改) 修改单链表某一个位置上的元素
+ * @param	L [LinkList]
+ * @param	location [int] 该元素在单链表上的位置
+ * @param	num [ElemType] 该元素需要修改的内容
+ * @retval	bool
+*/
+bool LNode_ModifyElem(LinkList L, int location, ElemType num)
+{
+	LNode *p = L->next;
+	for(int i = 0; i < location - 1; i ++){
+		if(p == NULL){
+			return FALSE;
+		}
+		p = p->next;
+	}
+
+	p->data = num;
+
+	return TRUE;
+}
+
+
+/**
+ * @brief	(查)查找单链表中的某一个元素
+ * @param	L [LinkList] 被查找的单链表
+ * @param	location [int] 该元素在单链表上的位置 (从1开始)
+ * @retval	ElemType
+*/
+ElemType LNode_FindElem(LinkList L, int location)
+{
+	LNode *p = L->next;
+	for(int i = 0; i < location - 1; i ++){
+		if(p == NULL) return -9999;
+		p = p->next;
+	}
+
+	return p->data;
 }

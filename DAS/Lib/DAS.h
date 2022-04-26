@@ -1,3 +1,25 @@
+/**
+ *                             _ooOoo_
+ *                            o8888888o
+ *                            88" . "88
+ *                            (| -_- |)
+ *                            O\  =  /O
+ *                         ____/`---'\____
+ *                       .'  \\|     |//  `.
+ *                      /  \\|||  :  |||//  \
+ *                     /  _||||| -:- |||||-  \
+ *                     |   | \\\  -  /// |   |
+ *                     | \_|  ''\---/''  |   |
+ *                     \  .-\__  `-`  ___/-. /
+ *                   ___`. .'  /--.--\  `. . __
+ *                ."" '<  `.___\_<|>_/___.'  >'"".
+ *               | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+ *               \  \ `-.   \_ __\ /__ _/   .-` /  /
+ *          ======`-.____`-.___\_____/___.-`____.-'======
+ *                             `=---='
+ *          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *                     佛祖保佑        永无BUG
+*/
 #ifndef __DAS_H__
 #define __DAS_H__
 #include <stdio.h>
@@ -32,7 +54,8 @@ typedef struct Linked_Node{
 typedef struct Dual_Linked_Node{
 	ElemType data;
 	struct Dual_Linked_Node *next;
-}DuLNode, *DuLinkList;
+	struct Dual_Linked_Node *prior;
+}DLNode, *DLinkList;
 
 
 #endif

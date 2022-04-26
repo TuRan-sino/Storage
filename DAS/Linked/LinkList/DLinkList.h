@@ -3,6 +3,10 @@
 #include "../../Lib/DAS.h"
 
 
-bool DuLNode_Init(DuLinkList *L);
+bool DLNode_Init(DLinkList *L);
+bool DLNode_Creat_Head(DLinkList *L);
+void DLNode_Show(DLinkList L);
+void DLNode_Show_Reverse(DLinkList L);
+bool DLNode_Creat_Tail(DLinkList *L);
 
 #endif
