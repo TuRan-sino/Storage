@@ -132,7 +132,7 @@ void SqList_Show(SqList L)
  * @note	location是从1开始计数的, 因此location作为插入位置比实际上的插入位置location' 多了一个位
  * @retval	int
 */
-int SqList_InsertElem(SqList *L, int location, ElemType data)
+int SqList_Insert_Elem(SqList *L, int location, ElemType data)
 {
 	if(L->length + 1 > L->maxsize){
 		SqList_Increase(L);
@@ -157,7 +157,7 @@ int SqList_InsertElem(SqList *L, int location, ElemType data)
  * @param	data [ElemType *] 删除的元素的内容
  * @retval	int
 */
-int SqList_DeletELem(SqList *L, int location, ElemType *data)
+int SqList_Delet_ELem(SqList *L, int location, ElemType *data)
 {
 	if(location > L->length || L->length == 0) return FALSE;		// 假设location 比 L的长度大, 或者L的长度本身就位0,  返回false
 
@@ -180,7 +180,7 @@ int SqList_DeletELem(SqList *L, int location, ElemType *data)
  * @param	data [ElemType] 需要修改的元素的内容
  * @retval	int
 */
-int SqList_ChangeElem(SqList *L, int location, ElemType data)
+int SqList_Modify_Elem(SqList *L, int location, ElemType data)
 {
 	if(location > L->length) return FALSE;
 
@@ -197,7 +197,7 @@ int SqList_ChangeElem(SqList *L, int location, ElemType data)
  * @param	data [ElemType *] 返回的元素
  * @retval	int
 */
-int SqList_FindElem(SqList *L, int location, ElemType *data)
+int SqList_Find_Elem(SqList *L, int location, ElemType *data)
 {
 	if(location > L->length) return FALSE;
 

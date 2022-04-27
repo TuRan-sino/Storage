@@ -43,7 +43,5 @@ int main(int argc, char const *argv[])
 
 int lengthOfLongestSubstring(char * s)
 {
-	typedef struct LinkList{
-		int 
-	}LinkList;
+	
 }

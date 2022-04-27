@@ -35,7 +35,7 @@
 
 		{
 			"type": "shell",
-			"label": "Compile C Code",
+			"label": "BUILD",
 			"command": "gcc",
 			"args": [
 				"${file}",
@@ -47,7 +47,7 @@
 			],
 			"group":{
 				"kind": "none",
-				"isDefault": false,
+				"isDefault": false
 			},
 			"presentation": {
 				"echo": true,
@@ -61,9 +61,9 @@
 
 		{
 			"type": "shell",
-			"label": "Run C exe",
+			"label": "RUN",
 			"command": "cd ${fileDirname}; ./a.exe",
-			"dependsOn": ["Compile C Code"],
+			"dependsOn": ["BUILD"],
 			"dependsOrder": "sequence",
 			"presentation": {
 				"echo": true,
@@ -81,7 +81,7 @@
 
 		{
 			"type": "shell",
-			"label": "Clean exe",
+			"label": "CLEAN",
 			"command": "rm",
 			"args": [
 				"${fileDirname}\\*.exe"

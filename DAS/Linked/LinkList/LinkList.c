@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	LNode_Init(&L);
 	LNode_Creat_Tail(&L);
 
-	LNode_DeletElem(&L, 3, &num);
+	LNode_Delet_Elem(&L, 3, &num);
 
 	printf("%d\n", num);
 
@@ -152,7 +152,7 @@ bool LNode_Insert_Elem(LinkList *L, int locatoin, ElemType num)
  * @param	num [ElemType *]	删除的节点的data域
  * @retval	bool
 */
-bool LNode_DeletElem(LinkList *L, int location, ElemType *num)
+bool LNode_Delet_Elem(LinkList *L, int location, ElemType *num)
 {
 	LNode *p = (*L)->next;
 	LNode *temp;
@@ -178,7 +178,7 @@ bool LNode_DeletElem(LinkList *L, int location, ElemType *num)
  * @param	num [ElemType] 该元素需要修改的内容
  * @retval	bool
 */
-bool LNode_ModifyElem(LinkList L, int location, ElemType num)
+bool LNode_Modify_Elem(LinkList L, int location, ElemType num)
 {
 	LNode *p = L->next;
 	for(int i = 0; i < location - 1; i ++){
@@ -200,7 +200,7 @@ bool LNode_ModifyElem(LinkList L, int location, ElemType num)
  * @param	location [int] 该元素在单链表上的位置 (从1开始)
  * @retval	ElemType
 */
-ElemType LNode_FindElem(LinkList L, int location)
+ElemType LNode_Find_Elem(LinkList L, int location)
 {
 	LNode *p = L->next;
 	for(int i = 0; i < location - 1; i ++){

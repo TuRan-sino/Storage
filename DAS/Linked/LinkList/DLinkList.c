@@ -9,10 +9,16 @@
 
 int main(int argc, char *argv[])
 {
+	ElemType temp;
 	DLinkList L;
 	DLNode_Init(&L);
 	DLNode_Creat_Tail(&L);
+
+
+	DLNode_Elem_Modify(&L, 3, 0);
+
 	DLNode_Show(L);
+	DLNode_Show_Reverse(L);
 }
 
 
@@ -103,13 +109,13 @@ bool DLNode_Creat_Tail(DLinkList *L)
 */
 void DLNode_Show(DLinkList L)
 {
+	printf("Your DLNode is :");
 	DLNode *p = L->next;
 	while(p != NULL){
 		printf("%d ", p->data);
 		p = p->next;
 	}
 	putchar('\n');
-	printf("show over\n");
 }
 
 
@@ -120,7 +126,7 @@ void DLNode_Show(DLinkList L)
 */
 void DLNode_Show_Reverse(DLinkList L)
 {
-	
+	printf("Your DLNode reverse is :");
 	DLNode *p = L->next;
 	while(p->next != NULL){
 		p = p->next;
@@ -130,14 +136,107 @@ void DLNode_Show_Reverse(DLinkList L)
 		p = p->prior;
 	}
 	putchar('\n');
-	printf("show over\n");
 }
 
 
 /**
- * @brief	
- * @param
- * @note
- * @retval
+ * @brief	(增) 双链表在某一个节点后面增加一个节点
+ * @param	L [DLinkList *] 需要修改的双链表
+ * @param	location [int] 插入节点的位置
+ * @param	num [ElemType] 新建节点的数据域内容
+ * @retval	bool
 */
-// bool
+bool DLNode_Elem_Insert(DLinkList *L, int location, ElemType num)
+{
+	DLNode *p = (*L)->next;
+	DLNode *s = malloc(sizeof(DLNode));
+	if(!(*L)) return FALSE;
+
+	s->data = num;
+
+	for(int i = 0; i < location - 1; i ++){
+		if(p == NULL) return FALSE;
+		p = p->next;
+	}
+	
+	if(p->next != NULL){
+		p->next->prior = s;
+	}
+	s->next = p->next;
+	p->next = s;
+	s->prior = p;
+
+	return TRUE;
+}
+
+
+/**
+ * @brief	(删) 删除双链表的某一个节点, 并返回该节点的数据域内容
+ * @param	L [DLinkList *] 进行操作双链表
+ * @param	location [int] 需要删除节点的位置
+ * @param	num [ElemType *] 被删除的数据域内容
+ * @retval	bool
+*/
+bool DLNode_Elem_Delet(DLinkList *L, int location, ElemType *num)
+{
+	DLNode *p = (*L)->next;
+	DLNode *temp;
+	if(!(*L)) return FALSE;
+
+	for(int i = 0; i < location - 1; i ++){
+		if(p->next == NULL) return FALSE;
+		p = p->next;
+	}
+
+	*num = p->data;
+
+	p->prior->next = p->next;
+	if(p->next != NULL){
+		p->next->prior = p->prior;
+	}
+
+	free(p);
+
+	return TRUE;
+}
+
+
+/**
+ * @brief	(改) 修改双链表某一个节点上面的数值
+ * @param	L [DLinkList *] 需要修改的双链表
+ * @param	location [int] 需要修改的节点的位置
+ * @param	num [ElemType] 需要修改的数据
+ * @retval	bool
+*/
+bool DLNode_Elem_Modify(DLinkList *L, int location, ElemType num)
+{
+	DLNode *p = (*L)->next;
+	if(!(*L)) return FALSE;
+
+	for(int i = 0; i < location - 1; i ++){
+		p = p->next;
+		if(p == NULL) return FALSE;
+	}
+
+	p->data = num;
+
+	return TRUE;
+}
+
+
+/**
+ * @brief	(查)查询当前双链表某一个节点的数据域
+ * @param	L [DLinkList] 需要查询的双链表
+ * @param	location [int] 需要查询的双链表的节点的位置
+ * @retval	ElemType 查询到的双链表节点的数据域内容
+*/
+ElemType DLNode_Elem_Find(DLinkList L, int location)
+{
+	DLNode *p = L->next;
+	for(int i = 0; i < location; i ++){
+		p = p->next;
+		if(p == NULL) return FALSE;
+	}
+
+	return p->data;
+}
