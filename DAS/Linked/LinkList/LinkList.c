@@ -57,7 +57,7 @@ bool LNode_Creat_Tail(LinkList *L)
 	scanf("%d", &x);
 
 	while(x != -9999){
-		LNode *s = malloc(sizeof(LNode));	// 新建一个节点, 用于随后的插入
+		LNode *s = (LNode *)malloc(sizeof(LNode));	// 新建一个节点, 用于随后的插入
 		s->next = r->next;					// 将新节点的指针指向最后一个指针的next域
 		s->data = x;						// 新节点指针data域赋值
 		if(s == NULL) return FALSE;			// 假设新节点创建失败, 返回false
@@ -88,7 +88,7 @@ bool LNode_Creat_Head(LinkList *L)
 	scanf("%d", &x);
 
 	while(x != -9999){
-		s = malloc(sizeof(LNode));		// 新建一个节点, 用于随后的插入
+		s = (LNode *)malloc(sizeof(LNode));		// 新建一个节点, 用于随后的插入
 		s->data = x;				// 新节点data域赋值
 		s->next = (*L)->next;			// 将新节点的next域指向头节点后面的那一个节点
 		(*L)->next = s;					// 头节点的next域指向新节点
@@ -129,7 +129,7 @@ void LNode_Show(LinkList L)
 */
 bool LNode_Insert_Elem(LinkList *L, int locatoin, ElemType num)
 {
-	LNode *s = malloc(sizeof(LNode));
+	LNode *s = (LNode *)malloc(sizeof(LNode));
 	LNode *p = (*L)->next;
 	s->data = num;
 

@@ -12,10 +12,14 @@ int main(int argc, char *argv[])
 
 	SqList_Init(&L);
 	SqList_Creat(&L);
+
+	int i = SqList_Find_Elem(&L, 3);
+
 	SqList_Show(L);
 
+	printf("%d\n", i);
+
 	
-	SqList_Destory(&L);
 
 
 	return TRUE;
@@ -197,11 +201,29 @@ int SqList_Modify_Elem(SqList *L, int location, ElemType data)
  * @param	data [ElemType *] 返回的元素
  * @retval	int
 */
-int SqList_Find_Elem(SqList *L, int location, ElemType *data)
+int SqList_Find_Location(SqList *L, int location, ElemType *data)
 {
 	if(location > L->length) return FALSE;
 
 	*data = L->data[location - 1];
 
 	return TRUE;
+}
+
+
+/**
+ * @brief	按值查找一个元素
+ * @param	L [SqList *] 查找的单链表对象
+ * @param	elem [int] 查找的元素
+ * @retval	假设查找到了某一个元素, 返回其位序(从1开始)
+ * 			假设没有查找到元素, 返回一个FALSE
+*/
+int SqList_Find_Elem(SqList *L, int elem)
+{
+	for(int i = 0; i < L->length; i ++){
+		if(L->data[i] == elem)
+			return i + 1;
+	}
+
+	return FALSE;
 }

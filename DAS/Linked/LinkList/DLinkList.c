@@ -1,7 +1,8 @@
 /***************************************************************************************************
 @author: TuRan
 @data: 
-@des: 	双链表相关代码
+@des: 	链表的变体 --> 双链表: 即除了next域之外多了一个prior域
+		双链表相关代码
 		Dual linked list code
 ****************************************************************************************************/
 #include "DLinkList.h"
@@ -29,7 +30,7 @@ int main(int argc, char *argv[])
 */
 bool DLNode_Init(DLinkList *L)
 {
-	(*L) = malloc(sizeof(DLNode));
+	(*L) = (DLNode *)malloc(sizeof(DLNode));
 	if(!(*L)) return FALSE;
 
 	(*L)->next = NULL;
@@ -54,7 +55,7 @@ bool DLNode_Creat_Head(DLinkList *L)
 	scanf("%d", &x);
 
 	while(x != -9999){
-		DLNode *s = malloc(sizeof(DLNode));
+		DLNode *s = (DLNode *)malloc(sizeof(DLNode));
 		
 		if(!s) return FALSE;
 		s->next = (*L)->next;
@@ -87,7 +88,7 @@ bool DLNode_Creat_Tail(DLinkList *L)
 
 	scanf("%d", &x);
 	while(x != -9999){
-		DLNode *s = malloc(sizeof(DLNode));
+		DLNode *s = (DLNode *)malloc(sizeof(DLNode));
 		if(!s) return FALSE;
 		s->data = x;
 		s->next = r->next;
@@ -149,7 +150,7 @@ void DLNode_Show_Reverse(DLinkList L)
 bool DLNode_Elem_Insert(DLinkList *L, int location, ElemType num)
 {
 	DLNode *p = (*L)->next;
-	DLNode *s = malloc(sizeof(DLNode));
+	DLNode *s = (DLNode *)malloc(sizeof(DLNode));
 	if(!(*L)) return FALSE;
 
 	s->data = num;

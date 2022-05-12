@@ -17,9 +17,9 @@
  *               \  \ `-.   \_ __\ /__ _/   .-` /  /
  *          ======`-.____`-.___\_____/___.-`____.-'======
  *                             `=---='
- *          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *        ^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^
  *                     佛祖保佑        永无BUG
-*/
+**/
 #ifndef __DAS_H__
 #define __DAS_H__
 #include <stdio.h>
@@ -56,6 +56,13 @@ typedef struct Dual_Linked_Node{
 	struct Dual_Linked_Node *next;
 	struct Dual_Linked_Node *prior;
 }DLNode, *DLinkList;
+
+// 顺序队列结构体
+typedef struct Sequence_Queue{
+	ElemType *data;
+	int front;		// 对头
+	int rear;		// 队尾
+}SqQue;
 
 
 #endif
